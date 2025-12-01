@@ -1,0 +1,2201 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>⚡ Casse la Brique Magique de Sonic</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      /* MODIFIÉ : Nouveau lien pour le fond d'écran */
+      background: url('https://i.pinimg.com/736x/78/28/d1/7828d1dffea5fc3ca7da533b923329fe.jpg') no-repeat center center fixed;
+      background-size: cover;
+      color: #ffffff;
+      text-align: center;
+      min-height: 100vh;
+      padding: 10px;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Overlay pour améliorer la lisibilité */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: -1;
+    }
+
+    .game-container {
+      max-width: 550px;
+      width: 100%;
+      margin: 0 auto;
+      background: rgba(0, 0, 0, 0.7);
+      border-radius: 20px;
+      padding: 20px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      position: relative;
+      border: 2px solid rgba(0, 163, 255, 0.3);
+    }
+
+    .game-container::before {
+      content: '';
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      right: -2px;
+      bottom: -2px;
+      background: linear-gradient(45deg, #0066ff, #00a3ff, #00ffcc, #0066ff);
+      border-radius: 22px;
+      z-index: -1;
+      animation: borderGlow 3s linear infinite;
+    }
+
+    @keyframes borderGlow {
+      0% { filter: hue-rotate(0deg); }
+      100% { filter: hue-rotate(360deg); }
+    }
+
+    h1 {
+      font-size: 2.2em;
+      margin-bottom: 15px;
+      text-shadow: 0 0 10px rgba(0, 163, 255, 0.5);
+      color: #ffffff;
+      background: linear-gradient(45deg, #0066ff, #00ffcc);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .instructions {
+      margin: 20px 0;
+      padding: 15px;
+      background: rgba(0, 163, 255, 0.1);
+      border-radius: 15px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(0, 163, 255, 0.3);
+    }
+
+    .instructions h2 {
+      font-size: 1.5em;
+      margin-bottom: 8px;
+      color: #00ffcc;
+    }
+
+    .instructions p {
+      font-size: 1.1em;
+      font-weight: bold;
+      color: #ffffff;
+    }
+
+    .brick-container {
+      position: relative;
+      margin: 20px auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      min-height: 350px;
+    }
+
+    .brick {
+      width: 280px;
+      height: 250px;
+      margin: 0 auto;
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      position: relative;
+      transition: all 0.3s ease;
+      filter: drop-shadow(0 0 15px rgba(0, 163, 255, 0.7));
+      z-index: 5;
+    }
+
+    .brick.noob {
+      background-image: url('https://i.ibb.co/gFMBxFzP/IMG-6063.png');
+      filter: drop-shadow(0 0 15px rgba(0, 255, 0, 0.7)) brightness(1.1);
+    }
+
+    .brick.buchette {
+      background-image: url('https://i.ibb.co/JMPfpWV/IMG-5851.png');
+      filter: drop-shadow(0 0 20px rgba(0, 163, 255, 0.8)) brightness(1.1);
+    }
+
+    .brick.easy {
+      background-image: url('https://i.ibb.co/p6s7HT5n/IMG-7322.png');
+      filter: drop-shadow(0 0 20px rgba(0, 163, 255, 0.8)) brightness(1.1);
+    }
+
+    .brick.medium {
+      background-image: url('https://i.ibb.co/hxXnkQh7/IMG-5861.png');
+      filter: drop-shadow(0 0 20px rgba(255, 165, 0, 0.8)) brightness(1.1) hue-rotate(15deg);
+    }
+
+    .brick.hard {
+      background-image: url('https://i.ibb.co/DHBNtX7t/IMG-6573.png');
+      filter: drop-shadow(0 0 25px rgba(255, 0, 0, 0.8)) brightness(1.1) hue-rotate(330deg);
+      animation: redGlow 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes redGlow {
+      0% { filter: drop-shadow(0 0 25px rgba(255, 0, 0, 0.8)) brightness(1.1) hue-rotate(330deg); }
+      100% { filter: drop-shadow(0 0 35px rgba(255, 50, 50, 1)) brightness(1.3) hue-rotate(320deg); }
+    }
+
+    .brick.hit {
+      animation: lightHit 0.4s ease-out;
+    }
+
+    .brick.heavy-hit {
+      animation: heavyHit 0.6s ease-out;
+    }
+
+    .brick.critical-hit {
+      animation: criticalHit 0.8s ease-out;
+    }
+
+    .brick.mega-hit {
+      animation: megaHit 1.2s ease-out;
+    }
+
+    .brick.ultra-hit {
+      animation: ultraHit 1.5s ease-out;
+    }
+
+    .brick.cracked {
+      filter: brightness(0.7) drop-shadow(0 0 15px rgba(255, 0, 0, 0.8));
+      animation: redPulse 1s infinite;
+    }
+
+    .brick.broken {
+      opacity: 0.3;
+      filter: grayscale(100%) brightness(0.3);
+      animation: knockout 1.5s ease-out forwards;
+    }
+
+    @keyframes lightHit {
+      0% { transform: translateX(0) rotate(0deg); }
+      25% { transform: translateX(-10px) rotate(-5deg); }
+      50% { transform: translateX(5px) rotate(3deg); }
+      75% { transform: translateX(-3px) rotate(-2deg); }
+      100% { transform: translateX(0) rotate(0deg); }
+    }
+
+    @keyframes heavyHit {
+      0% { transform: translateX(0) rotate(0deg) scale(1); }
+      20% { transform: translateX(-15px) rotate(-10deg) scale(0.95); }
+      40% { transform: translateX(8px) rotate(5deg) scale(1.05); }
+      60% { transform: translateX(-4px) rotate(-3deg) scale(0.98); }
+      80% { transform: translateX(2px) rotate(2deg) scale(1.02); }
+      100% { transform: translateX(0) rotate(0deg) scale(1); }
+    }
+
+    @keyframes criticalHit {
+      0% { transform: translateX(0) rotate(0deg) scale(1); }
+      15% { transform: translateX(-20px) rotate(-15deg) scale(0.9); }
+      30% { transform: translateX(12px) rotate(10deg) scale(1.1); }
+      45% { transform: translateX(-8px) rotate(-6deg) scale(0.95); }
+      60% { transform: translateX(5px) rotate(4deg) scale(1.05); }
+      75% { transform: translateX(-3px) rotate(-2deg) scale(0.98); }
+      90% { transform: translateX(1px) rotate(1deg) scale(1.02); }
+      100% { transform: translateX(0) rotate(0deg) scale(1); }
+    }
+
+    @keyframes megaHit {
+      0% { transform: translateX(0) rotate(0deg) scale(1); }
+      10% { transform: translateX(-25px) rotate(-20deg) scale(0.85); }
+      20% { transform: translateX(15px) rotate(12deg) scale(1.15); }
+      30% { transform: translateX(-12px) rotate(-8deg) scale(0.9); }
+      40% { transform: translateX(8px) rotate(6deg) scale(1.1); }
+      50% { transform: translateX(-6px) rotate(-4deg) scale(0.95); }
+      60% { transform: translateX(4px) rotate(3deg) scale(1.05); }
+      70% { transform: translateX(-2px) rotate(-2deg) scale(0.98); }
+      80% { transform: translateX(1px) rotate(1deg) scale(1.02); }
+      90% { transform: translateX(-0.5px) rotate(-0.5deg) scale(0.99); }
+      100% { transform: translateX(0) rotate(0deg) scale(1); }
+    }
+
+    @keyframes ultraHit {
+      0% { transform: translateX(0) rotate(0deg) scale(1); }
+      8% { transform: translateX(-30px) rotate(-25deg) scale(0.8); }
+      16% { transform: translateX(20px) rotate(15deg) scale(1.2); }
+      24% { transform: translateX(-15px) rotate(-12deg) scale(0.85); }
+      32% { transform: translateX(12px) rotate(10deg) scale(1.15); }
+      40% { transform: translateX(-8px) rotate(-8deg) scale(0.9); }
+      48% { transform: translateX(6px) rotate(5deg) scale(1.1); }
+      56% { transform: translateX(-4px) rotate(-4deg) scale(0.95); }
+      64% { transform: translateX(3px) rotate(3deg) scale(1.05); }
+      72% { transform: translateX(-2px) rotate(-2deg) scale(0.98); }
+      80% { transform: translateX(1px) rotate(1deg) scale(1.02); }
+      88% { transform: translateX(-0.5px) rotate(-0.5deg) scale(0.99); }
+      96% { transform: translateX(0.3px) rotate(0.3deg) scale(1.01); }
+      100% { transform: translateX(0) rotate(0deg) scale(1); }
+    }
+
+    @keyframes knockout {
+      0% { transform: translateY(0) rotate(0deg) scale(1); opacity: 1; }
+      30% { transform: translateY(-10px) rotate(-15deg) scale(0.95); opacity: 0.9; }
+      70% { transform: translateY(40px) rotate(-90deg) scale(0.8); opacity: 0.7; }
+      100% { transform: translateY(60px) rotate(-90deg) scale(0.7); opacity: 0.4; }
+    }
+
+    @keyframes redPulse {
+      0%, 100% { filter: brightness(0.7) drop-shadow(0 0 15px rgba(255, 0, 0, 0.8)); }
+      50% { filter: brightness(0.5) drop-shadow(0 0 25px rgba(255, 0, 0, 1)); }
+    }
+
+    .screen-shake {
+      animation: screenShake 0.4s ease-out;
+    }
+
+    .mega-shake {
+      animation: megaShake 0.8s ease-out;
+    }
+
+    .ultra-shake {
+      animation: ultraShake 1.2s ease-out;
+    }
+
+    @keyframes screenShake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-3px); }
+      75% { transform: translateX(3px); }
+    }
+
+    @keyframes megaShake {
+      0%, 100% { transform: translateX(0) translateY(0); }
+      10% { transform: translateX(-5px) translateY(-2px); }
+      20% { transform: translateX(5px) translateY(2px); }
+      30% { transform: translateX(-4px) translateY(-1px); }
+      40% { transform: translateX(4px) translateY(1px); }
+      50% { transform: translateX(-3px) translateY(-1px); }
+      60% { transform: translateX(3px) translateY(1px); }
+      70% { transform: translateX(-2px) translateY(-0.5px); }
+      80% { transform: translateX(2px) translateY(0.5px); }
+    }
+
+    @keyframes ultraShake {
+      0%, 100% { transform: translateX(0) translateY(0); }
+      5% { transform: translateX(-8px) translateY(-3px); }
+      10% { transform: translateX(8px) translateY(3px); }
+      15% { transform: translateX(-6px) translateY(-2px); }
+      20% { transform: translateX(6px) translateY(2px); }
+      25% { transform: translateX(-4px) translateY(-1px); }
+      30% { transform: translateX(4px) translateY(1px); }
+      35% { transform: translateX(-3px) translateY(-1px); }
+      40% { transform: translateX(3px) translateY(1px); }
+      45% { transform: translateX(-2px) translateY(-0.5px); }
+      50% { transform: translateX(2px) translateY(0.5px); }
+      55% { transform: translateX(-1px) translateY(-0.2px); }
+      60% { transform: translateX(1px) translateY(0.2px); }
+    }
+
+    .impact-effect {
+      position: absolute;
+      font-size: 2em;
+      pointer-events: none;
+      z-index: 3;
+      animation: impactPop 1s ease-out forwards;
+      opacity: 0;
+      filter: drop-shadow(0 0 8px rgba(0, 163, 255, 0.8));
+    }
+
+    @keyframes impactPop {
+      0% { opacity: 0; transform: scale(0.3) translateY(0); }
+      30% { opacity: 1; transform: scale(1.3) translateY(-10px); }
+      100% { opacity: 0; transform: scale(1) translateY(-30px); }
+    }
+
+    /* Styles pour Sonic (AGGRANDI x2) */
+    .sonic {
+      position: absolute;
+      width: 360px; /* 180px * 2 */
+      height: 360px; /* 180px * 2 */
+      background-image: url('https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExaHcxc3R1M2dzMXcyNGdrYmt4b2Zubm50YjRtNjhkNzl6b3BvNThzdCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/tWxWSLETMcXRzWvV2B/giphy.gif');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      z-index: 6;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      transition: all 0.3s ease;
+    }
+
+    .sonic.jumping {
+      animation: sonicJump 0.6s ease-out;
+    }
+
+    @keyframes sonicJump {
+      0% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(-240px); } /* 120px * 2 */
+      100% { transform: translateX(-50%) translateY(0); }
+    }
+
+    /* Animation d'attaque spéciale (AGGRANDIE x2) */
+    .special-attack {
+      position: absolute;
+      width: 360px; /* 180px * 2 */
+      height: 360px; /* 180px * 2 */
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 4;
+      pointer-events: none;
+      opacity: 0;
+    }
+
+    .special-attack.active {
+      animation: specialAttackAnim 1s ease-out forwards;
+    }
+
+    @keyframes specialAttackAnim {
+      0% {
+        opacity: 0;
+        transform: translateY(-50%) translateX(-50px) scale(0.5);
+      }
+      20% {
+        opacity: 1;
+        transform: translateY(-50%) translateX(0) scale(1);
+      }
+      80% {
+        opacity: 1;
+        transform: translateY(-50%) translateX(0) scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(-50%) translateX(20px) scale(0.8);
+      }
+    }
+
+    /* Section pour changer de skin */
+    .skin-selector {
+      margin: 15px 0;
+      padding: 15px;
+      background: rgba(0, 163, 255, 0.1);
+      border-radius: 15px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(0, 163, 255, 0.3);
+    }
+
+    .skin-selector h3 {
+      font-size: 1.2em;
+      margin-bottom: 10px;
+      color: #00ffcc;
+    }
+
+    .skin-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .skin-btn {
+      width: 80px;
+      height: 80px;
+      border-radius: 10px;
+      cursor: pointer;
+      border: 2px solid rgba(0, 163, 255, 0.3);
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      transition: all 0.3s ease;
+    }
+
+    .skin-btn:hover {
+      transform: scale(1.05);
+      border-color: #00ffcc;
+    }
+
+    .skin-btn.active {
+      border-color: #00ffcc;
+      box-shadow: 0 0 15px rgba(0, 163, 255, 0.7);
+      transform: scale(1.1);
+    }
+
+    .attack-modes {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin: 15px 0;
+      flex-wrap: wrap;
+    }
+
+    .attack-mode-image {
+      width: 110px;
+      height: 110px;
+      cursor: pointer;
+      border: 2px solid rgba(0, 163, 255, 0.3);
+      border-radius: 15px;
+      background: rgba(0, 163, 255, 0.1);
+      transition: all 0.3s ease;
+      backdrop-filter: blur(5px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 10px;
+      position: relative;
+    }
+
+    .attack-mode-image:hover {
+      background: rgba(0, 163, 255, 0.2);
+      transform: translateY(-3px);
+    }
+
+    .attack-mode-image.active {
+      border-color: #00ffcc;
+      box-shadow: 0 0 20px rgba(0, 163, 255, 0.7);
+      background: rgba(0, 163, 255, 0.3);
+      transform: scale(1.05);
+    }
+
+    .attack-mode-image img {
+      width: 65px;
+      height: 65px;
+      object-fit: contain;
+      filter: drop-shadow(0 0 5px rgba(0, 163, 255, 0.5));
+    }
+
+    .attack-mode-label {
+      font-size: 13px;
+      margin-top: 5px;
+      font-weight: bold;
+      color: #00ffcc;
+      text-shadow: 0 0 3px rgba(0, 0, 0, 0.8);
+    }
+
+    .multiplier-indicator {
+      position: absolute;
+      top: -10px;
+      right: -10px;
+      background: linear-gradient(45deg, #0066ff, #00ffcc);
+      color: #000;
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 14px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      border: 2px solid white;
+    }
+
+    .controls {
+      margin: 15px 0;
+    }
+
+    button {
+      padding: 12px 25px;
+      margin: 8px;
+      font-size: 14px;
+      cursor: pointer;
+      border: none;
+      border-radius: 20px;
+      background: linear-gradient(45deg, #0066ff, #00a3ff);
+      color: #ffffff;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      text-transform: uppercase;
+      font-weight: bold;
+      letter-spacing: 0.5px;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+      background: linear-gradient(45deg, #00a3ff, #00ffcc);
+    }
+
+    button:active {
+      transform: translateY(0);
+    }
+
+    #resetBtn {
+      background: linear-gradient(45deg, #555, #777);
+    }
+
+    #resetBtn:hover {
+      background: linear-gradient(45deg, #777, #999);
+    }
+
+    #message {
+      margin: 15px 0;
+      font-size: 1.1em;
+      font-weight: bold;
+      text-shadow: 0 0 8px rgba(0, 163, 255, 0.8);
+      min-height: 25px;
+      color: #ffffff;
+    }
+
+    /* Styles pour la popup de victoire */
+    .popup-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .popup-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .popup-content {
+      background: linear-gradient(135deg, rgba(0, 102, 255, 0.95), rgba(0, 163, 255, 0.95));
+      padding: 25px;
+      border-radius: 20px;
+      max-width: 450px;
+      width: 90%;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      border: 3px solid rgba(0, 255, 204, 0.5);
+      backdrop-filter: blur(10px);
+      transform: scale(0.7);
+      transition: transform 0.4s ease;
+      position: relative;
+    }
+
+    .popup-overlay.active .popup-content {
+      transform: scale(1);
+    }
+
+    .popup-content h3 {
+      font-size: 1.8em;
+      margin-bottom: 15px;
+      color: #ffffff;
+      text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    }
+
+    .popup-reward-image {
+      width: 140px;
+      height: 140px;
+      margin: 15px auto;
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+    }
+
+    .popup-reward-text {
+      font-size: 1.3em;
+      margin: 15px 0;
+      color: #ffffff;
+      font-weight: bold;
+      text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    }
+
+    .popup-victory-message {
+      font-size: 1.4em;
+      margin: 15px 0;
+      color: #00ffcc;
+      text-shadow: 0 0 10px rgba(0, 102, 255, 0.7);
+      font-weight: bold;
+    }
+
+    .popup-close-btn {
+      padding: 10px 25px;
+      font-size: 16px;
+      cursor: pointer;
+      border: none;
+      border-radius: 20px;
+      background: linear-gradient(45deg, #0066ff, #00a3ff);
+      color: #ffffff;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      font-weight: bold;
+      margin-top: 15px;
+    }
+
+    .popup-close-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+      background: linear-gradient(45deg, #00a3ff, #00ffcc);
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .coins-display {
+      position: absolute;
+      top: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(45deg, #0066ff, #00ffcc);
+      color: white;
+      padding: 4px 12px;
+      border-radius: 15px;
+      font-weight: bold;
+      animation: coinPop 1s ease;
+      pointer-events: none;
+      z-index: 4;
+    }
+
+    @keyframes coinPop {
+      0% {
+        opacity: 0;
+        transform: translateX(-50%) translateY(15px) scale(0.5);
+      }
+      50% {
+        opacity: 1;
+        transform: translateX(-50%) translateY(-8px) scale(1.1);
+      }
+      100% {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-25px) scale(1);
+      }
+    }
+
+    .combo-indicator {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: linear-gradient(45deg, #0066ff, #00a3ff);
+      padding: 8px 15px;
+      border-radius: 20px;
+      font-weight: bold;
+      font-size: 0.9em;
+      display: none;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      border: 2px solid rgba(0, 255, 204, 0.2);
+      color: #ffffff;
+    }
+
+    .difficulty-selector {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin: 15px 0;
+    }
+
+    .difficulty-btn {
+      width: 80px;
+      height: 80px;
+      border-radius: 15px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: 3px solid rgba(0, 163, 255, 0.3);
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .difficulty-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.2);
+      transition: all 0.3s ease;
+    }
+
+    .difficulty-btn:hover::before {
+      background: rgba(0, 0, 0, 0.1);
+    }
+
+    .difficulty-btn.noob {
+      background-image: url('https://i.ibb.co/gFMBxFzP/IMG-6063.png');
+    }
+
+    .difficulty-btn.buchette {
+      background-image: url('https://i.ibb.co/JMPfpWV/IMG-5851.png');
+    }
+
+    .difficulty-btn.easy {
+      background-image: url('https://i.ibb.co/p6s7HT5n/IMG-7322.png');
+    }
+
+    .difficulty-btn.medium {
+      background-image: url('https://i.ibb.co/hxXnkQh7/IMG-5861.png');
+    }
+
+    .difficulty-btn.hard {
+      background-image: url('https://i.ibb.co/DHBNtX7t/IMG-6573.png');
+    }
+
+    .difficulty-btn.active {
+      border-color: #00ffcc;
+      box-shadow: 0 0 20px rgba(0, 163, 255, 0.8);
+      transform: scale(1.1);
+    }
+
+    .difficulty-btn.active::before {
+      background: rgba(0, 163, 255, 0.2);
+    }
+
+    /* Styles pour mobile */
+    @media (max-width: 480px) {
+      .game-container {
+        padding: 15px;
+        margin: 5px;
+      }
+      
+      h1 {
+        font-size: 1.8em;
+      }
+      
+      .brick {
+        width: 220px;
+        height: 200px;
+      }
+
+      .sonic {
+        width: 280px; /* 140px * 2 */
+        height: 280px; /* 140px * 2 */
+      }
+
+      .special-attack {
+        width: 280px; /* 140px * 2 */
+        height: 280px; /* 140px * 2 */
+      }
+
+      .difficulty-selector {
+        gap: 10px;
+      }
+
+      .difficulty-btn {
+        width: 70px;
+        height: 70px;
+      }
+      
+      .skin-selector {
+        padding: 10px;
+      }
+      
+      .skin-btn {
+        width: 60px;
+        height: 60px;
+      }
+      
+      .instructions {
+        padding: 10px;
+        margin: 15px 0;
+      }
+      
+      .instructions h2 {
+        font-size: 1.3em;
+      }
+      
+      .instructions p {
+        font-size: 1em;
+      }
+      
+      .attack-modes {
+        gap: 4px;
+      }
+
+      .attack-mode-btn {
+        padding: 5px 8px;
+        font-size: 11px;
+        min-width: 40px;
+      }
+      
+      button {
+        padding: 10px 20px;
+        font-size: 13px;
+        margin: 5px;
+      }
+      
+      .popup-content {
+        padding: 20px;
+        max-width: 90%;
+      }
+      
+      .popup-reward-image {
+        width: 120px;
+        height: 120px;
+      }
+      
+      .popup-content h3 {
+        font-size: 1.5em;
+      }
+      
+      .popup-reward-text {
+        font-size: 1.1em;
+      }
+      
+      .popup-victory-message {
+        font-size: 1.2em;
+      }
+    }
+
+    /* Effets de particules */
+    .particles-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .particle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: #00ffcc;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .difficulty-badge {
+      display: inline-block;
+      padding: 5px 15px;
+      border-radius: 20px;
+      font-weight: bold;
+      margin: 10px 0;
+      color: #ffffff;
+    }
+
+    .difficulty-badge.noob {
+      background: linear-gradient(45deg, #87CEEB, #B0E0E6);
+      color: #000;
+    }
+
+    .difficulty-badge.buchette {
+      background: linear-gradient(45deg, #DDA0DD, #DA70D6);
+    }
+
+    .difficulty-badge.easy {
+      background: linear-gradient(45deg, #4CAF50, #8BC34A);
+    }
+
+    .difficulty-badge.medium {
+      background: linear-gradient(45deg, #FF9800, #FFC107);
+    }
+
+    .difficulty-badge.hard {
+      background: linear-gradient(45deg, #F44336, #E91E63);
+    }
+
+    /* Compteur de points de vie */
+    .hp-counter {
+      background: linear-gradient(45deg, #0066ff, #00a3ff);
+      color: white;
+      padding: 12px 20px;
+      border-radius: 15px;
+      font-weight: bold;
+      font-size: 14px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      border: 2px solid rgba(0, 255, 204, 0.2);
+      backdrop-filter: blur(5px);
+      margin: 15px auto;
+      max-width: 200px;
+      text-align: center;
+    }
+
+    .hp-counter .hp-label {
+      font-size: 12px;
+      opacity: 0.9;
+      display: block;
+      color: #ffffff;
+    }
+
+    .hp-counter .hp-value {
+      font-size: 16px;
+      font-weight: bold;
+      margin-top: 2px;
+      display: block;
+      color: #ffffff;
+    }
+
+    /* Styles pour le jackpot */
+    .jackpot-container {
+      background: rgba(0, 0, 0, 0.4);
+      border-radius: 10px;
+      padding: 10px;
+      margin: 15px 0;
+      border: 1px solid rgba(0, 255, 204, 0.3);
+      box-shadow: 0 0 10px rgba(0, 255, 204, 0.2);
+      backdrop-filter: blur(5px);
+      transition: all 0.3s ease;
+    }
+
+    .jackpot-container:hover {
+      background: rgba(0, 0, 0, 0.5);
+      box-shadow: 0 0 15px rgba(0, 255, 204, 0.3);
+    }
+
+    .jackpot-title {
+      font-size: 1.1em;
+      margin-bottom: 8px;
+      color: #00ffcc;
+      text-shadow: 0 0 5px rgba(0, 255, 204, 0.5);
+    }
+
+    .jackpot-amount {
+      font-size: 1.4em;
+      font-weight: bold;
+      color: #00ffcc;
+      text-shadow: 0 0 8px rgba(0, 255, 204, 0.7);
+      margin-bottom: 8px;
+    }
+
+    .jackpot-progress-container {
+      width: 100%;
+      height: 12px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 6px;
+      overflow: hidden;
+      margin: 8px 0;
+    }
+
+    .jackpot-progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, #0066ff, #00a3ff, #00ffcc);
+      border-radius: 6px;
+      transition: width 0.5s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .jackpot-progress-bar::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      animation: shimmer 2s infinite;
+    }
+
+    @keyframes shimmer {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
+    }
+
+    /* Tableau des derniers gains */
+    .winners-table {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      width: 250px;
+      background: rgba(0, 0, 0, 0.6);
+      border-radius: 10px;
+      padding: 15px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(0, 255, 204, 0.3);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+      z-index: 100;
+      cursor: move;
+      transition: all 0.3s ease;
+    }
+
+    .winners-table:hover {
+      background: rgba(0, 0, 0, 0.7);
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.6);
+    }
+
+    .winners-title {
+      font-size: 1.1em;
+      margin-bottom: 10px;
+      color: #00ffcc;
+      text-align: center;
+      border-bottom: 1px solid rgba(0, 255, 204, 0.3);
+      padding-bottom: 5px;
+    }
+
+    .winners-list {
+      max-height: 200px;
+      overflow-y: auto;
+    }
+
+    .winner-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 5px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      font-size: 0.9em;
+    }
+
+    .winner-name {
+      color: #ffffff;
+    }
+
+    .winner-amount {
+      color: #00ffcc;
+      font-weight: bold;
+    }
+
+    .jackpot-winner {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.5s ease;
+    }
+
+    .jackpot-winner.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .jackpot-winner-content {
+      background: linear-gradient(135deg, rgba(0, 102, 255, 0.95), rgba(0, 255, 204, 0.95));
+      padding: 30px;
+      border-radius: 20px;
+      max-width: 500px;
+      width: 90%;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      border: 3px solid rgba(255, 255, 255, 0.5);
+      backdrop-filter: blur(10px);
+      transform: scale(0.7);
+      transition: transform 0.5s ease;
+      position: relative;
+    }
+
+    .jackpot-winner.active .jackpot-winner-content {
+      transform: scale(1);
+    }
+
+    .jackpot-winner-content h3 {
+      font-size: 2em;
+      margin-bottom: 20px;
+      color: #ffffff;
+      text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    }
+
+    .jackpot-winner-amount {
+      font-size: 2.5em;
+      font-weight: bold;
+      color: #00ffcc;
+      text-shadow: 0 0 15px rgba(0, 255, 204, 0.9);
+      margin: 20px 0;
+    }
+
+    .jackpot-winner-message {
+      font-size: 1.3em;
+      margin: 20px 0;
+      color: #ffffff;
+      text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    }
+
+    .jackpot-close-btn {
+      padding: 12px 30px;
+      font-size: 16px;
+      cursor: pointer;
+      border: none;
+      border-radius: 20px;
+      background: linear-gradient(45deg, #0066ff, #00ffcc);
+      color: #000;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      font-weight: bold;
+      margin-top: 15px;
+    }
+
+    .jackpot-close-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+      background: linear-gradient(45deg, #00a3ff, #00ffcc);
+    }
+
+    /* Boutons de sauvegarde */
+    .save-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin: 10px 0;
+    }
+
+    .save-btn {
+      background: linear-gradient(45deg, #4CAF50, #8BC34A);
+    }
+
+    .save-btn:hover {
+      background: linear-gradient(45deg, #45a049, #7cb342);
+    }
+
+    .load-btn {
+      background: linear-gradient(45deg, #2196F3, #03A9F4);
+    }
+
+    .load-btn:hover {
+      background: linear-gradient(45deg, #1e88e5, #039be5);
+    }
+
+    .reset-save-btn {
+      background: linear-gradient(45deg, #F44336, #E91E63);
+    }
+
+    .reset-save-btn:hover {
+      background: linear-gradient(45deg, #e53935, #d81b60);
+    }
+  </style>
+</head>
+<body>
+  <div class="winners-table" id="winnersTable">
+    <div class="winners-title">⚡ Derniers Jackpots ⚡</div>
+    <div class="winners-list" id="winnersList">
+      </div>
+  </div>
+
+  <div class="game-container" id="gameContainer">
+    <div class="combo-indicator" id="comboIndicator">COMBO x0</div>
+
+    <h1>⚡ Casse la Brique Magique de Sonic !</h1>
+    
+    <div class="jackpot-container">
+      <div class="jackpot-title">JACKPOT</div>
+      <div class="jackpot-amount" id="jackpotAmount">1 000 ⚡</div>
+      <div class="jackpot-progress-container">
+        <div class="jackpot-progress-bar" id="jackpotProgressBar" style="width: 0%"></div>
+      </div>
+    </div>
+    
+    <div class="difficulty-selector">
+      <div class="difficulty-btn noob active" data-difficulty="noob" title="Noob - 1500 HP"></div>
+      <div class="difficulty-btn buchette" data-difficulty="buchette" title="Buchette - 5000 HP"></div>
+      <div class="difficulty-btn easy" data-difficulty="easy" title="Facile - 15000 HP"></div>
+      <div class="difficulty-btn medium" data-difficulty="medium" title="Moyen - 25000 HP"></div>
+      <div class="difficulty-btn hard" data-difficulty="hard" title="Difficile - 50000 HP"></div>
+    </div>
+    
+    <div class="brick-container">
+      <div class="special-attack" id="specialAttack"></div>
+      <div class="brick easy" id="brick"></div>
+      <div class="sonic" id="sonic"></div>
+      <div class="particles-container" id="particlesContainer"></div>
+    </div>
+
+    <div class="instructions">
+      <h2>⚡ Casse la Brique Magique et Gagne le Trésor ! ⚡</h2>
+      <p>Un Coup = Un Point de Vie en Moins</p>
+    </div>
+
+    <div class="skin-selector">
+      <h3>🎭 Changer l'apparence de Sonic</h3>
+      <div class="skin-buttons">
+        <div class="skin-btn active" data-skin="sonic-run" style="background-image: url('https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExaHcxc3R1M2dzMXcyNGdrYmt4b2Zubm50YjRtNjhkNzl6b3BvNThzdCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/tWxWSLETMcXRzWvV2B/giphy.gif')" title="Sonic - Course"></div>
+        <div class="skin-btn" data-skin="sonic-spin" style="background-image: url('https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExMHdpdzZlZmt2aDJ5a2FhOG0ybXc3eHdsOHMwemI4b2Q2aDR2MG9sNSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/n1qM0jUn2qDE9oQ4K1/giphy.gif')" title="Sonic - Rotation"></div>
+        <div class="skin-btn" data-skin="sonic-fast" style="background-image: url('https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExemlmd21sMTR6dmQ1dWpsNWU0c3U1dXJ6NHRtZ3M4Z3pkc3JvbTI3dyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/Mf2VJXVQpkNHJOtmsE/giphy.gif')" title="Sonic - Rapide"></div>
+        <div class="skin-btn" data-skin="sonic-boost" style="background-image: url('https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExMWxpcXUyZXgyN2R3bTBtMWJmeXIydnlxMng2NjMyazhwd2xmazNpeCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/y0HIA3gH3wqXSIWkrb/giphy.gif')" title="Sonic - Boost"></div>
+        <div class="skin-btn" data-skin="super-sonic" style="background-image: url('https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExZng5NGQ0ZWVwdWMzaHg4bTk5aWlpdjk4YXUwZTM3dGIyaGh0YzZreiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/qC0AFNKo07fpyaI2QA/giphy.gif')" title="Super Sonic"></div>
+      </div>
+    </div>
+
+    <div class="attack-modes">
+      <div id="mode1" class="attack-mode-image active">
+        <img src="https://i.ibb.co/WNXDxn2y/IMG-7354-Photoroom.png" alt="Rose - 1 coup">
+        <div class="attack-mode-label">1 coup</div>
+      </div>
+      <div id="mode10" class="attack-mode-image">
+        <img src="https://i.ibb.co/7JsBRrCn/IMG-5885.png" alt="Rosa - 10 coups">
+        <div class="attack-mode-label">10 coups</div>
+      </div>
+      <div id="mode30" class="attack-mode-image">
+        <img src="https://i.ibb.co/8DMJ0cxy/IMG-7355-Photoroom.png" alt="Donuts - 30 coups">
+        <div class="attack-mode-label">30 coups</div>
+      </div>
+      <div id="mode100" class="attack-mode-image">
+        <img src="https://i.ibb.co/C5M6DHcS/IMG-7356-Photoroom.png" alt="Coeurs - 100 coups">
+        <div class="attack-mode-label">100 coups</div>
+      </div>
+      <div id="mode500" class="attack-mode-image">
+        <img src="https://i.ibb.co/nNy17WfL/IMG-6065.png" alt="Mini Gun - 500 coups">
+        <div class="attack-mode-label">500 coups</div>
+      </div>
+      <div id="mode1000" class="attack-mode-image">
+        <img src="https://i.ibb.co/JMPfpWV/IMG-5851.png" alt="Galaxie - 1000 coups">
+        <div class="attack-mode-label">1000 coups</div>
+      </div>
+    </div>
+
+    <div class="controls">
+      <button id="attackBtn">Attaquer (1 coup)</button>
+      <button id="resetBtn">Nouvelle Brique</button>
+    </div>
+
+    <div class="save-buttons">
+      <button id="saveBtn" class="save-btn">Sauvegarder</button>
+      <button id="loadBtn" class="load-btn">Charger</button>
+      <button id="resetSaveBtn" class="reset-save-btn">Réinitialiser</button>
+    </div>
+
+    <p id="message"></p>
+  </div>
+
+  <div class="hp-counter" id="hpCounter">
+    <span class="hp-label">Points de vie restants</span>
+    <span class="hp-value" id="hpValue">15000 / 15000</span>
+  </div>
+
+  <div class="popup-overlay" id="victoryPopup">
+    <div class="popup-content">
+      <h3>🎉 Brique Magique Cassée ! 🎉</h3>
+      <div id="popupRewardImage" class="popup-reward-image"></div>
+      <p id="popupRewardText" class="popup-reward-text"></p>
+      <div id="popupVictoryMessage" class="popup-victory-message"></div>
+      <button class="popup-close-btn" id="closePopupBtn">Continuer</button>
+    </div>
+  </div>
+
+  <div class="jackpot-winner" id="jackpotWinner">
+    <div class="jackpot-winner-content">
+      <h3>⚡ JACKPOT GAGNÉ ! ⚡</h3>
+      <div class="jackpot-winner-amount" id="jackpotWinnerAmount">1 000 ⚡</div>
+      <p class="jackpot-winner-message">Félicitations ! Vous avez remporté le jackpot !</p>
+      <button class="jackpot-close-btn" id="jackpotCloseBtn">Continuer</button>
+    </div>
+  </div>
+
+  <script>
+    let maxHP, currentHP, coupCounter, totalHits;
+    let hitsUntilCoin = 4;
+    let attackMode = 1;
+    let rosesEarnedThisDiamond = 0;
+    let combo = 0;
+    let lastHitTime = 0;
+    let isAttacking = false;
+    let audioContext = null;
+    let currentDifficulty = "noob";
+    let currentSkin = "sonic-run";
+    
+    // Variables pour le jackpot
+    let jackpotAmount = 1000;
+    let jackpotProgress = 0;
+    let jackpotHitsCounter = 0;
+    let recentWinners = [];
+
+    const brick = document.getElementById("brick");
+    const sonic = document.getElementById("sonic");
+    const message = document.getElementById("message");
+    const attackBtn = document.getElementById("attackBtn");
+    const gameContainer = document.getElementById("gameContainer");
+    const comboIndicator = document.getElementById("comboIndicator");
+    const particlesContainer = document.getElementById("particlesContainer");
+    const hpValue = document.getElementById("hpValue");
+    const specialAttack = document.getElementById("specialAttack");
+    
+    // Éléments de la popup
+    const victoryPopup = document.getElementById("victoryPopup");
+    const popupRewardImage = document.getElementById("popupRewardImage");
+    const popupRewardText = document.getElementById("popupRewardText");
+    const popupVictoryMessage = document.getElementById("popupVictoryMessage");
+    const closePopupBtn = document.getElementById("closePopupBtn");
+    
+    // Éléments du jackpot
+    const jackpotAmountElement = document.getElementById("jackpotAmount");
+    const jackpotProgressBar = document.getElementById("jackpotProgressBar");
+    const jackpotWinner = document.getElementById("jackpotWinner");
+    const jackpotWinnerAmount = document.getElementById("jackpotWinnerAmount");
+    const jackpotCloseBtn = document.getElementById("jackpotCloseBtn");
+    
+    // Éléments du tableau des gains
+    const winnersTable = document.getElementById("winnersTable");
+    const winnersList = document.getElementById("winnersList");
+    
+    // Boutons de sauvegarde
+    const saveBtn = document.getElementById("saveBtn");
+    const loadBtn = document.getElementById("loadBtn");
+    const resetSaveBtn = document.getElementById("resetSaveBtn");
+
+    const impactEffects = ["💥", "⚡", "✨", "💫", "🌟", "💢"];
+    
+    // URLs des skins Sonic
+    const sonicSkins = {
+      "sonic-run": "https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExaHcxc3R1M2dzMXcyNGdrYmt4b2Zubm50YjRtNjhkNzl6b3BvNThzdCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/tWxWSLETMcXRzWvV2B/giphy.gif",
+      "sonic-spin": "https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExMHdpdzZlZmt2aDJ5a2FhOG0ybXc3eHdsOHMwemI4b2Q2aDR2MG9sNSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/n1qM0jUn2qDE9oQ4K1/giphy.gif",
+      "sonic-fast": "https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExemlmd21sMTR6dmQ1dWpsNWU0c3U1dXJ6NHRtZ3M4Z3pkc3JvbTI3dyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/Mf2VJXVQpkNHJOtmsE/giphy.gif",
+      "sonic-boost": "https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExMWxpcXUyZXgyN2R3bTBtMWJmeXIydnlxMng2NjMyazhwd2xmazNpeCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/y0HIA3gH3wqXSIWkrb/giphy.gif",
+      "super-sonic": "https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExZng5NGQ0ZWVwdWMzaHg4bTk5aWlpdjk4YXUwZTM3dGIyaGh0YzZreiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/qC0AFNKo07fpyaI2QA/giphy.gif"
+    };
+
+    // Système audio corrigé
+    function initAudioContext() {
+      try {
+        if (!audioContext) {
+          audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        }
+        if (audioContext.state === 'suspended') {
+          audioContext.resume();
+        }
+        return audioContext;
+      } catch (e) {
+        return null;
+      }
+    }
+
+    function createSound(frequency, duration, type = 'sine', volume = 0.15) {
+      const context = initAudioContext();
+      if (!context) return;
+
+      try {
+        const oscillator = context.createOscillator();
+        const gainNode = context.createGain();
+        
+        oscillator.connect(gainNode);
+        gainNode.connect(context.destination);
+        
+        oscillator.frequency.value = frequency;
+        oscillator.type = type;
+        
+        gainNode.gain.setValueAtTime(volume, context.currentTime);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, context.currentTime + duration);
+        
+        oscillator.start(context.currentTime);
+        oscillator.stop(context.currentTime + duration);
+      } catch (e) {
+        // Silence en cas d'erreur
+      }
+    }
+
+    function playHitSound() {
+      createSound(800, 0.1, 'square');
+      setTimeout(() => createSound(400, 0.05, 'triangle'), 50);
+    }
+
+    function playCrackSound() {
+      createSound(200, 0.3, 'sawtooth');
+      setTimeout(() => createSound(150, 0.2, 'sawtooth'), 100);
+    }
+
+    function playBreakSound() {
+      createSound(100, 0.5, 'sawtooth');
+      setTimeout(() => createSound(300, 0.3, 'square'), 100);
+      setTimeout(() => createSound(600, 0.2, 'sine'), 200);
+    }
+
+    function playJackpotSound() {
+      createSound(523, 0.1, 'sine', 0.2);
+      setTimeout(() => createSound(659, 0.1, 'sine', 0.2), 100);
+      setTimeout(() => createSound(784, 0.1, 'sine', 0.2), 200);
+      setTimeout(() => createSound(1047, 0.3, 'sine', 0.3), 300);
+    }
+
+    // Fonction pour créer des particules d'impact
+    function createHitParticles() {
+      for (let i = 0; i < 8; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        
+        const brickRect = brick.getBoundingClientRect();
+        const containerRect = brick.parentElement.getBoundingClientRect();
+        
+        particle.style.left = (brickRect.left + brickRect.width/2 - containerRect.left + (Math.random() * 60 - 30)) + 'px';
+        particle.style.top = (brickRect.top + brickRect.height/2 - containerRect.top + (Math.random() * 60 - 30)) + 'px';
+        
+        particlesContainer.appendChild(particle);
+        
+        const angle = Math.random() * Math.PI * 2;
+        const distance = 30 + Math.random() * 40;
+        
+        particle.animate([
+          {
+            transform: 'scale(1)',
+            opacity: 1
+          },
+          {
+            transform: `translate(${Math.cos(angle) * distance}px, ${Math.sin(angle) * distance}px) scale(0)`,
+            opacity: 0
+          }
+        ], {
+          duration: 500 + Math.random() * 300,
+          easing: 'ease-out'
+        }).onfinish = () => particle.remove();
+      }
+    }
+
+    // Fonction pour animer l'attaque spéciale
+    function animateSpecialAttack() {
+      // Pour les attaques spéciales, on utilise le marteau GIF
+      specialAttack.style.backgroundImage = "url('https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3Z3c4NnJqbWU0aHV5a3l0dWRxcHNla3Exc25kdm42Y2x4ZGNxM2tlYyZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/0KE6CVV0wylamqw4S8/giphy.gif')";
+      specialAttack.style.backgroundSize = "contain";
+      specialAttack.style.backgroundRepeat = "no-repeat";
+      specialAttack.style.backgroundPosition = "center";
+      
+      // Activer l'animation
+      specialAttack.classList.add('active');
+      
+      // Désactiver l'animation après qu'elle soit terminée
+      setTimeout(() => {
+        specialAttack.classList.remove('active');
+      }, 1000);
+    }
+
+    // Fonction pour animer Sonic qui saute
+    function animateSonicJump() {
+      sonic.classList.add('jumping');
+      
+      // Retirer la classe après l'animation
+      setTimeout(() => {
+        sonic.classList.remove('jumping');
+      }, 600);
+    }
+
+    function createImpactEffect() {
+      const effect = document.createElement('div');
+      effect.className = 'impact-effect';
+      effect.textContent = impactEffects[Math.floor(Math.random() * impactEffects.length)];
+      effect.style.left = (Math.random() * 70 + 15) + '%';
+      effect.style.top = (Math.random() * 50 + 25) + '%';
+      
+      document.querySelector('.brick-container').appendChild(effect);
+      
+      setTimeout(() => {
+        effect.remove();
+      }, 1000);
+    }
+
+    function updateCombo() {
+      const currentTime = Date.now();
+      if (currentTime - lastHitTime > 2000) {
+        combo = 0;
+      }
+      combo++;
+      lastHitTime = currentTime;
+      
+      if (combo >= 3) {
+        comboIndicator.textContent = `COMBO x${combo}`;
+        comboIndicator.style.display = 'block';
+      }
+    }
+
+    // Fonction pour mettre à jour le jackpot
+    function updateJackpot() {
+      jackpotAmountElement.textContent = jackpotAmount.toLocaleString() + " ⚡";
+      jackpotProgressBar.style.width = jackpotProgress + "%";
+    }
+
+    // Fonction pour mettre à jour le tableau des gains
+    function updateWinnersTable() {
+      winnersList.innerHTML = '';
+      
+      if (recentWinners.length === 0) {
+        winnersList.innerHTML = '<div class="winner-item"><span class="winner-name">Aucun gain récent</span></div>';
+        return;
+      }
+      
+      recentWinners.forEach(winner => {
+        const winnerItem = document.createElement('div');
+        winnerItem.className = 'winner-item';
+        winnerItem.innerHTML = `
+          <span class="winner-name">${winner.name}</span>
+          <span class="winner-amount">${winner.amount.toLocaleString()} ⚡</span>
+        `;
+        winnersList.appendChild(winnerItem);
+      });
+    }
+
+    // Fonction pour vérifier si le jackpot est gagné
+    function checkJackpot() {
+      // Vérifier si on a atteint 100 coups pour ajouter 5 roses au jackpot
+      if (jackpotHitsCounter >= 100) {
+        jackpotAmount += 5;
+        jackpotHitsCounter = 0;
+        jackpotProgress = 0;
+        
+        // Mettre à jour l'affichage
+        updateJackpot();
+        
+        // Vérifier si on gagne le jackpot (1 chance sur 5 millions)
+        if (Math.random() < 1/5000000) {
+          winJackpot();
+        }
+      } else {
+        // Mettre à jour la progression
+        jackpotProgress = (jackpotHitsCounter / 100) * 100;
+        updateJackpot();
+      }
+    }
+
+    // Fonction pour gagner le jackpot
+    function winJackpot() {
+      playJackpotSound();
+      
+      // Ajouter le gagnant à la liste
+      const playerName = "Joueur " + Math.floor(Math.random() * 1000);
+      recentWinners.unshift({
+        name: playerName,
+        amount: jackpotAmount
+      });
+      
+      // Garder seulement les 5 derniers gains
+      if (recentWinners.length > 5) {
+        recentWinners = recentWinners.slice(0, 5);
+      }
+      
+      // Mettre à jour le tableau des gains
+      updateWinnersTable();
+      
+      // Afficher la popup de victoire du jackpot
+      jackpotWinnerAmount.textContent = jackpotAmount.toLocaleString() + " ⚡";
+      jackpotWinner.classList.add('active');
+      
+      // Réinitialiser le jackpot
+      jackpotAmount = 1000;
+      jackpotHitsCounter = 0;
+      jackpotProgress = 0;
+      updateJackpot();
+    }
+
+    // Fonction d'attaque CORRIGÉE avec protection anti-clics multiples
+    function attack() {
+      if (currentHP <= 0 || isAttacking) return;
+      
+      isAttacking = true;
+      
+      let hits = attackMode;
+      let actualHits = 0;
+      let rosesEarned = 0;
+      let wasCracked = brick.classList.contains('cracked');
+      
+      // Animer Sonic qui saute
+      animateSonicJump();
+      
+      // Animer l'attaque spéciale pour les modes d'attaque élevés
+      if (attackMode >= 10) {
+        animateSpecialAttack();
+      }
+      
+      playHitSound();
+      createHitParticles();
+      createImpactEffect();
+      updateCombo();
+      
+      let animationType = 'hit';
+      let shakeType = 'screen-shake';
+      let animationDuration = 400;
+      
+      if (attackMode >= 1000) {
+        animationType = 'ultra-hit';
+        shakeType = 'ultra-shake';
+        animationDuration = 1200;
+      } else if (attackMode >= 500) {
+        animationType = 'mega-hit';
+        shakeType = 'mega-shake';
+        animationDuration = 1000;
+      } else if (attackMode >= 100) {
+        animationType = 'critical-hit';
+        shakeType = 'mega-shake';
+        animationDuration = 800;
+      } else if (attackMode >= 30) {
+        animationType = 'heavy-hit';
+        animationDuration = 600;
+      } else if (attackMode >= 10) {
+        animationType = 'heavy-hit';
+        animationDuration = 600;
+      }
+
+      brick.classList.add(animationType);
+      if (shakeType) gameContainer.classList.add(shakeType);
+      
+      for (let i = 0; i < hits && currentHP > 0; i++) {
+        coupCounter++;
+        actualHits++;
+        totalHits++;
+        jackpotHitsCounter++; // Incrémenter le compteur de coups pour le jackpot
+
+        // 1 coup = -1 point de vie
+        currentHP--;
+
+        hitsUntilCoin--;
+        if (hitsUntilCoin <= 0) {
+          rosesEarnedThisDiamond++;
+          rosesEarned++;
+          hitsUntilCoin = 4;
+        }
+      }
+      
+      // Vérifier si on gagne le jackpot
+      checkJackpot();
+      
+      if (rosesEarned > 0) {
+        showRoseGain(rosesEarned);
+      }
+      
+      updateUI();
+      
+      if (!wasCracked && brick.classList.contains('cracked')) {
+        playCrackSound();
+      }
+      
+      setTimeout(() => {
+        brick.classList.remove(animationType);
+        if (shakeType) gameContainer.classList.remove(shakeType);
+        isAttacking = false;
+        
+        if (currentHP <= 0) {
+          endGame();
+        }
+      }, animationDuration);
+    }
+
+    function showRoseGain(amount) {
+      const roseDisplay = document.createElement('div');
+      roseDisplay.className = 'coins-display';
+      roseDisplay.textContent = `+${amount} ⚡`;
+      brick.parentElement.appendChild(roseDisplay);
+      
+      setTimeout(() => {
+        roseDisplay.remove();
+      }, 1000);
+    }
+
+    function updateUI() {
+      // Mettre à jour le compteur de points de vie
+      hpValue.textContent = `${currentHP.toLocaleString()} / ${maxHP.toLocaleString()}`;
+      
+      let difficultyName = "";
+      switch(currentDifficulty) {
+        case "noob": difficultyName = "noob"; break;
+        case "buchette": difficultyName = "buchette"; break;
+        case "easy": difficultyName = "facile"; break;
+        case "medium": difficultyName = "moyen"; break;
+        case "hard": difficultyName = "difficile"; break;
+      }
+      
+      if (currentHP === 0) {
+        brick.className = "brick broken " + currentDifficulty;
+        message.textContent = "💥 La brique magique a été cassée !";
+      } else {
+        if (maxHP - currentHP >= maxHP * 0.7) {
+          brick.classList.add("cracked");
+          message.textContent = "⚠️ La brique magique commence à faiblir...";
+        } else {
+          brick.classList.remove("cracked");
+          message.textContent = `Brique magique ${difficultyName} - À tout moment la brique peut être cassée...`;
+        }
+      }
+    }
+
+    function showVictoryPopup() {
+      let rewardText = "";
+      let victoryText = "";
+      let rewardImg = "";
+      
+      // Déterminer la récompense selon la difficulté
+      switch(currentDifficulty) {
+        case "noob":
+          rewardText = "Vous avez gagné 300 pièces !";
+          victoryText = "Bravo ! Tu as gagné tes premières pièces !";
+          rewardImg = "https://i.ibb.co/gFMBxFzP/IMG-6063.png";
+          break;
+        case "buchette":
+          rewardText = "Vous avez gagné une galaxie !";
+          victoryText = "Incroyable ! Tu as découvert une galaxie entière !";
+          rewardImg = "https://i.ibb.co/JMPfpWV/IMG-5851.png";
+          break;
+        case "easy":
+          rewardText = "Vous avez gagné 3000 pièces !";
+          victoryText = "Félicitations ! Tu as remporté un superbe trésor !";
+          rewardImg = "https://i.ibb.co/p6s7HT5n/IMG-7322.png";
+          break;
+        case "medium":
+          rewardText = "Vous avez gagné 5000 pièces !";
+          victoryText = "Incroyable ! Tu as trouvé un trésor précieux !";
+          rewardImg = "https://i.ibb.co/hxXnkQh7/IMG-5861.png";
+          break;
+        case "hard":
+          rewardText = "Vous avez gagné 10000 pièces !";
+          victoryText = "Victoire totale ! Tu as remporté le jackpot !";
+          rewardImg = "https://i.ibb.co/DHBNtX7t/IMG-6573.png";
+          break;
+      }
+      
+      popupRewardImage.style.backgroundImage = `url('${rewardImg}')`;
+      
+      // Message de victoire clair et épuré
+      popupRewardText.innerHTML = `
+        <div class="difficulty-badge ${currentDifficulty}">NIVEAU ${currentDifficulty.toUpperCase()}</div><br>
+        <strong>RÉCOMPENSE :</strong><br>
+        ${rewardText}
+      `;
+      
+      popupVictoryMessage.textContent = victoryText;
+      
+      // Centrer la popup sur le jeu
+      const gameRect = gameContainer.getBoundingClientRect();
+      const popupContent = document.querySelector('.popup-content');
+      
+      // Positionner la popup au centre du jeu
+      victoryPopup.style.display = 'flex';
+      setTimeout(() => {
+        victoryPopup.classList.add('active');
+      }, 10);
+    }
+
+    function closeVictoryPopup() {
+      victoryPopup.classList.remove('active');
+      setTimeout(() => {
+        victoryPopup.style.display = 'none';
+      }, 300);
+    }
+
+    function closeJackpotPopup() {
+      jackpotWinner.classList.remove('active');
+    }
+
+    function endGame() {
+      playBreakSound();
+      
+      message.textContent = "💥 Félicitations ! Tu as cassé la brique magique ! ⚡✨";
+      
+      setTimeout(() => {
+        showVictoryPopup();
+      }, 500);
+      
+      comboIndicator.style.display = "none";
+    }
+
+    function setAttackMode(mode) {
+      attackMode = mode;
+      
+      document.querySelectorAll('.attack-mode-image').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      
+      const btnEl = document.getElementById(`mode${mode}`);
+      if (btnEl) btnEl.classList.add('active');
+
+      attackBtn.textContent = `Attaquer (${mode} coup${mode > 1 ? 's' : ''})`;
+    }
+
+    function setDifficulty(difficulty) {
+      currentDifficulty = difficulty;
+      
+      // Mettre à jour l'apparence des boutons de difficulté
+      document.querySelectorAll('.difficulty-btn').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      document.querySelector(`.difficulty-btn.${difficulty}`).classList.add('active');
+      
+      // Mettre à jour l'apparence de la brique
+      brick.className = "brick " + difficulty;
+      
+      // Réinitialiser le jeu avec la nouvelle difficulté
+      initGame();
+    }
+
+    // Fonction pour changer de skin Sonic
+    function setSonicSkin(skin) {
+      currentSkin = skin;
+      
+      // Mettre à jour l'apparence des boutons de skin
+      document.querySelectorAll('.skin-btn').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      document.querySelector(`.skin-btn[data-skin="${skin}"]`).classList.add('active');
+      
+      // Mettre à jour l'image de Sonic
+      sonic.style.backgroundImage = `url('${sonicSkins[skin]}')`;
+      
+      // Sauvegarder le skin dans le localStorage
+      try {
+        localStorage.setItem('sonicSkin', skin);
+      } catch (e) {
+        // Ignorer les erreurs de localStorage
+      }
+    }
+
+    function initGame() {
+      // Définir les points de vie selon la difficulté
+      switch(currentDifficulty) {
+        case "noob":
+          maxHP = 1500;
+          break;
+        case "buchette":
+          maxHP = 5000;
+          break;
+        case "easy":
+          maxHP = 15000;
+          break;
+        case "medium":
+          maxHP = 25000;
+          break;
+        case "hard":
+          maxHP = 50000;
+          break;
+      }
+      
+      currentHP = maxHP;
+      coupCounter = 0;
+      totalHits = 0;
+      hitsUntilCoin = 4;
+      rosesEarnedThisDiamond = 0;
+      combo = 0;
+      lastHitTime = 0;
+      isAttacking = false;
+      
+      brick.className = "brick " + currentDifficulty;
+      
+      let difficultyName = "";
+      switch(currentDifficulty) {
+        case "noob": difficultyName = "noob"; break;
+        case "buchette": difficultyName = "buchette"; break;
+        case "easy": difficultyName = "facile"; break;
+        case "medium": difficultyName = "moyen"; break;
+        case "hard": difficultyName = "difficile"; break;
+      }
+      message.textContent = `Brique magique ${difficultyName} - À tout moment la brique peut être cassée...`;
+      
+      // Fermer la popup si elle est ouverte
+      closeVictoryPopup();
+      comboIndicator.style.display = "none";
+
+      // reset des compteurs visibles (sécurité si tu veux les afficher autrement)
+      coupCounter = 0;
+      totalHits = 0;
+      hitsUntilCoin = 4;
+      
+      // Mettre à jour l'affichage des points de vie
+      updateUI();
+    }
+
+    // Fonction pour rendre le tableau des gains déplaçable
+    function makeElementDraggable(element) {
+      let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+      
+      element.onmousedown = dragMouseDown;
+      
+      function dragMouseDown(e) {
+        e = e || window.event;
+        e.preventDefault();
+        // Obtenir la position de la souris au début du déplacement
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+        document.onmouseup = closeDragElement;
+        // Appeler une fonction chaque fois que la souris bouge
+        document.onmousemove = elementDrag;
+      }
+      
+      function elementDrag(e) {
+        e = e || window.event;
+        e.preventDefault();
+        // Calculer la nouvelle position
+        pos1 = pos3 - e.clientX;
+        pos2 = pos4 - e.clientY;
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+        // Définir la nouvelle position de l'élément
+        element.style.top = (element.offsetTop - pos2) + "px";
+        element.style.left = (element.offsetLeft - pos1) + "px";
+      }
+      
+      function closeDragElement() {
+        // Arrêter le déplacement lorsque le bouton de la souris est relâché
+        document.onmouseup = null;
+        document.onmousemove = null;
+      }
+    }
+
+    // FONCTIONS DE SAUVEGARDE
+    function saveGame() {
+      try {
+        const gameData = {
+          jackpotAmount: jackpotAmount,
+          jackpotHitsCounter: jackpotHitsCounter,
+          jackpotProgress: jackpotProgress,
+          recentWinners: recentWinners,
+          currentSkin: currentSkin,
+          saveDate: new Date().toISOString()
+        };
+        
+        localStorage.setItem('sonicBrickGameSave', JSON.stringify(gameData));
+        
+        // Afficher un message de confirmation
+        const originalText = saveBtn.textContent;
+        saveBtn.textContent = "✓ Sauvegardé !";
+        saveBtn.style.background = "linear-gradient(45deg, #4CAF50, #8BC34A)";
+        
+        setTimeout(() => {
+          saveBtn.textContent = originalText;
+          saveBtn.style.background = "linear-gradient(45deg, #4CAF50, #8BC34A)";
+        }, 2000);
+        
+        console.log("Jeu sauvegardé avec succès !");
+      } catch (error) {
+        console.error("Erreur lors de la sauvegarde :", error);
+        alert("Erreur lors de la sauvegarde. Vérifiez que votre navigateur autorise le stockage local.");
+      }
+    }
+
+    function loadGame() {
+      try {
+        const savedData = localStorage.getItem('sonicBrickGameSave');
+        
+        if (!savedData) {
+          alert("Aucune sauvegarde trouvée !");
+          return;
+        }
+        
+        const gameData = JSON.parse(savedData);
+        
+        // Charger les données du jackpot
+        jackpotAmount = gameData.jackpotAmount || 1000;
+        jackpotHitsCounter = gameData.jackpotHitsCounter || 0;
+        jackpotProgress = gameData.jackpotProgress || 0;
+        recentWinners = gameData.recentWinners || [];
+        currentSkin = gameData.currentSkin || "sonic-run";
+        
+        // Appliquer le skin sauvegardé
+        setSonicSkin(currentSkin);
+        
+        // Mettre à jour l'affichage
+        updateJackpot();
+        updateWinnersTable();
+        
+        // Afficher un message de confirmation
+        const originalText = loadBtn.textContent;
+        loadBtn.textContent = "✓ Chargé !";
+        loadBtn.style.background = "linear-gradient(45deg, #2196F3, #03A9F4)";
+        
+        setTimeout(() => {
+          loadBtn.textContent = originalText;
+          loadBtn.style.background = "linear-gradient(45deg, #2196F3, #03A9F4)";
+        }, 2000);
+        
+        console.log("Jeu chargé avec succès !");
+      } catch (error) {
+        console.error("Erreur lors du chargement :", error);
+        alert("Erreur lors du chargement de la sauvegarde. Le fichier peut être corrompu.");
+      }
+    }
+
+    function resetSave() {
+      if (confirm("Êtes-vous sûr de vouloir réinitialiser la sauvegarde ? Cette action est irréversible.")) {
+        try {
+          localStorage.removeItem('sonicBrickGameSave');
+          
+          // Réinitialiser les données du jackpot
+          jackpotAmount = 1000;
+          jackpotHitsCounter = 0;
+          jackpotProgress = 0;
+          recentWinners = [];
+          currentSkin = "sonic-run";
+          
+          // Réappliquer le skin par défaut
+          setSonicSkin("sonic-run");
+          
+          // Mettre à jour l'affichage
+          updateJackpot();
+          updateWinnersTable();
+          
+          // Afficher un message de confirmation
+          const originalText = resetSaveBtn.textContent;
+          resetSaveBtn.textContent = "✓ Réinitialisé !";
+          resetSaveBtn.style.background = "linear-gradient(45deg, #F44336, #E91E63)";
+          
+          setTimeout(() => {
+            resetSaveBtn.textContent = originalText;
+            resetSaveBtn.style.background = "linear-gradient(45deg, #F44336, #E91E63)";
+          }, 2000);
+          
+          console.log("Sauvegarde réinitialisée !");
+        } catch (error) {
+          console.error("Erreur lors de la réinitialisation :", error);
+        }
+      }
+    }
+
+    // Événements CORRIGÉS
+    document.getElementById("attackBtn").addEventListener("click", attack);
+    document.getElementById("resetBtn").addEventListener("click", initGame);
+
+    // Boutons de sauvegarde
+    saveBtn.addEventListener("click", saveGame);
+    loadBtn.addEventListener("click", loadGame);
+    resetSaveBtn.addEventListener("click", resetSave);
+
+    // Boutons d'attaque (images d'origine conservées)
+    document.getElementById("mode1").addEventListener("click", () => setAttackMode(1));
+    document.getElementById("mode10").addEventListener("click", () => setAttackMode(10));
+    document.getElementById("mode30").addEventListener("click", () => setAttackMode(30));
+    document.getElementById("mode100").addEventListener("click", () => setAttackMode(100));
+    document.getElementById("mode500").addEventListener("click", () => setAttackMode(500));
+    document.getElementById("mode1000").addEventListener("click", () => setAttackMode(1000));
+
+    // Sélecteur de difficulté
+    document.querySelectorAll('.difficulty-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        setDifficulty(this.getAttribute('data-difficulty'));
+      });
+    });
+
+    // Boutons de changement de skin
+    document.querySelectorAll('.skin-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        setSonicSkin(this.getAttribute('data-skin'));
+      });
+    });
+
+    // Fermer la popup
+    closePopupBtn.addEventListener('click', closeVictoryPopup);
+    jackpotCloseBtn.addEventListener('click', closeJackpotPopup);
+
+    // Fermer la popup en cliquant en dehors
+    victoryPopup.addEventListener('click', function(e) {
+      if (e.target === this) {
+        closeVictoryPopup();
+      }
+    });
+
+    jackpotWinner.addEventListener('click', function(e) {
+      if (e.target === this) {
+        closeJackpotPopup();
+      }
+    });
+
+    // Raccourcis clavier
+    document.addEventListener('keydown', (e) => {
+      if (isAttacking) return;
+      
+      switch(e.key) {
+        case ' ':
+        case 'Enter':
+          e.preventDefault();
+          attack();
+          break;
+        case '1':
+          setAttackMode(1);
+          break;
+        case '2':
+          setAttackMode(10);
+          break;
+        case '3':
+          setAttackMode(30);
+          break;
+        case '4':
+          setAttackMode(100);
+          break;
+        case '5':
+          setAttackMode(500);
+          break;
+        case '6':
+          setAttackMode(1000);
+          break;
+        case 'r':
+        case 'R':
+          initGame();
+          break;
+        case 'n':
+        case 'N':
+          setDifficulty('noob');
+          break;
+        case 'b':
+        case 'B':
+          setDifficulty('buchette');
+          break;
+        case 'e':
+        case 'E':
+          setDifficulty('easy');
+          break;
+        case 'm':
+        case 'M':
+          setDifficulty('medium');
+          break;
+        case 'd':
+        case 'D':
+          setDifficulty('hard');
+          break;
+        case 's':
+        case 'S':
+          saveGame();
+          break;
+        case 'l':
+        case 'L':
+          loadGame();
+          break;
+        case 'a':
+        case 'A':
+          setSonicSkin('sonic-run');
+          break;
+        case 'z':
+        case 'Z':
+          setSonicSkin('sonic-spin');
+          break;
+        case 'e':
+        case 'E':
+          setSonicSkin('sonic-fast');
+          break;
+        case 'q':
+        case 'Q':
+          setSonicSkin('sonic-boost');
+          break;
+        case 'w':
+        case 'W':
+          setSonicSkin('super-sonic');
+          break;
+        case 'Escape':
+          closeVictoryPopup();
+          closeJackpotPopup();
+          break;
+      }
+    });
+
+    // Reset combo après inactivité
+    setInterval(() => {
+      const currentTime = Date.now();
+      if (currentTime - lastHitTime > 3000 && combo > 0) {
+        combo = 0;
+        comboIndicator.style.display = "none";
+      }
+    }, 1000);
+
+    // Initialiser le jackpot
+    updateJackpot();
+    updateWinnersTable();
+    
+    // Rendre le tableau des gains déplaçable
+    makeElementDraggable(winnersTable);
+    
+    // Charger automatiquement la sauvegarde au démarrage
+    window.addEventListener('load', function() {
+      const savedData = localStorage.getItem('sonicBrickGameSave');
+      if (savedData) {
+        console.log("Sauvegarde détectée, chargement automatique...");
+        loadGame();
+      }
+      
+      // Charger le skin sauvegardé s'il existe
+      const savedSkin = localStorage.getItem('sonicSkin');
+      if (savedSkin && sonicSkins[savedSkin]) {
+        setSonicSkin(savedSkin);
+      }
+    });
+    
+    initGame();
+  </script>
+</body>
+</html>
