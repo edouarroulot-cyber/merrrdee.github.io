@@ -62,8 +62,13 @@
     }
 
     @keyframes borderGlow {
-      0% { filter: hue-rotate(0deg); }
-      100% { filter: hue-rotate(360deg); }
+      0% {
+        filter: hue-rotate(0deg);
+      }
+
+      100% {
+        filter: hue-rotate(360deg);
+      }
     }
 
     h1 {
@@ -148,8 +153,13 @@
     }
 
     @keyframes redGlow {
-      0% { filter: drop-shadow(0 0 25px rgba(255, 0, 0, 0.8)) brightness(1.1) hue-rotate(330deg); }
-      100% { filter: drop-shadow(0 0 35px rgba(255, 50, 50, 1)) brightness(1.3) hue-rotate(320deg); }
+      0% {
+        filter: drop-shadow(0 0 25px rgba(255, 0, 0, 0.8)) brightness(1.1) hue-rotate(330deg);
+      }
+
+      100% {
+        filter: drop-shadow(0 0 35px rgba(255, 50, 50, 1)) brightness(1.3) hue-rotate(320deg);
+      }
     }
 
     .brick.hit {
@@ -184,74 +194,223 @@
     }
 
     @keyframes lightHit {
-      0% { transform: translateX(0) rotate(0deg); }
-      25% { transform: translateX(-10px) rotate(-5deg); }
-      50% { transform: translateX(5px) rotate(3deg); }
-      75% { transform: translateX(-3px) rotate(-2deg); }
-      100% { transform: translateX(0) rotate(0deg); }
+      0% {
+        transform: translateX(0) rotate(0deg);
+      }
+
+      25% {
+        transform: translateX(-10px) rotate(-5deg);
+      }
+
+      50% {
+        transform: translateX(5px) rotate(3deg);
+      }
+
+      75% {
+        transform: translateX(-3px) rotate(-2deg);
+      }
+
+      100% {
+        transform: translateX(0) rotate(0deg);
+      }
     }
 
     @keyframes heavyHit {
-      0% { transform: translateX(0) rotate(0deg) scale(1); }
-      20% { transform: translateX(-15px) rotate(-10deg) scale(0.95); }
-      40% { transform: translateX(8px) rotate(5deg) scale(1.05); }
-      60% { transform: translateX(-4px) rotate(-3deg) scale(0.98); }
-      80% { transform: translateX(2px) rotate(2deg) scale(1.02); }
-      100% { transform: translateX(0) rotate(0deg) scale(1); }
+      0% {
+        transform: translateX(0) rotate(0deg) scale(1);
+      }
+
+      20% {
+        transform: translateX(-15px) rotate(-10deg) scale(0.95);
+      }
+
+      40% {
+        transform: translateX(8px) rotate(5deg) scale(1.05);
+      }
+
+      60% {
+        transform: translateX(-4px) rotate(-3deg) scale(0.98);
+      }
+
+      80% {
+        transform: translateX(2px) rotate(2deg) scale(1.02);
+      }
+
+      100% {
+        transform: translateX(0) rotate(0deg) scale(1);
+      }
     }
 
     @keyframes criticalHit {
-      0% { transform: translateX(0) rotate(0deg) scale(1); }
-      15% { transform: translateX(-20px) rotate(-15deg) scale(0.9); }
-      30% { transform: translateX(12px) rotate(10deg) scale(1.1); }
-      45% { transform: translateX(-8px) rotate(-6deg) scale(0.95); }
-      60% { transform: translateX(5px) rotate(4deg) scale(1.05); }
-      75% { transform: translateX(-3px) rotate(-2deg) scale(0.98); }
-      90% { transform: translateX(1px) rotate(1deg) scale(1.02); }
-      100% { transform: translateX(0) rotate(0deg) scale(1); }
+      0% {
+        transform: translateX(0) rotate(0deg) scale(1);
+      }
+
+      15% {
+        transform: translateX(-20px) rotate(-15deg) scale(0.9);
+      }
+
+      30% {
+        transform: translateX(12px) rotate(10deg) scale(1.1);
+      }
+
+      45% {
+        transform: translateX(-8px) rotate(-6deg) scale(0.95);
+      }
+
+      60% {
+        transform: translateX(5px) rotate(4deg) scale(1.05);
+      }
+
+      75% {
+        transform: translateX(-3px) rotate(-2deg) scale(0.98);
+      }
+
+      90% {
+        transform: translateX(1px) rotate(1deg) scale(1.02);
+      }
+
+      100% {
+        transform: translateX(0) rotate(0deg) scale(1);
+      }
     }
 
     @keyframes megaHit {
-      0% { transform: translateX(0) rotate(0deg) scale(1); }
-      10% { transform: translateX(-25px) rotate(-20deg) scale(0.85); }
-      20% { transform: translateX(15px) rotate(12deg) scale(1.15); }
-      30% { transform: translateX(-12px) rotate(-8deg) scale(0.9); }
-      40% { transform: translateX(8px) rotate(6deg) scale(1.1); }
-      50% { transform: translateX(-6px) rotate(-4deg) scale(0.95); }
-      60% { transform: translateX(4px) rotate(3deg) scale(1.05); }
-      70% { transform: translateX(-2px) rotate(-2deg) scale(0.98); }
-      80% { transform: translateX(1px) rotate(1deg) scale(1.02); }
-      90% { transform: translateX(-0.5px) rotate(-0.5deg) scale(0.99); }
-      100% { transform: translateX(0) rotate(0deg) scale(1); }
+      0% {
+        transform: translateX(0) rotate(0deg) scale(1);
+      }
+
+      10% {
+        transform: translateX(-25px) rotate(-20deg) scale(0.85);
+      }
+
+      20% {
+        transform: translateX(15px) rotate(12deg) scale(1.15);
+      }
+
+      30% {
+        transform: translateX(-12px) rotate(-8deg) scale(0.9);
+      }
+
+      40% {
+        transform: translateX(8px) rotate(6deg) scale(1.1);
+      }
+
+      50% {
+        transform: translateX(-6px) rotate(-4deg) scale(0.95);
+      }
+
+      60% {
+        transform: translateX(4px) rotate(3deg) scale(1.05);
+      }
+
+      70% {
+        transform: translateX(-2px) rotate(-2deg) scale(0.98);
+      }
+
+      80% {
+        transform: translateX(1px) rotate(1deg) scale(1.02);
+      }
+
+      90% {
+        transform: translateX(-0.5px) rotate(-0.5deg) scale(0.99);
+      }
+
+      100% {
+        transform: translateX(0) rotate(0deg) scale(1);
+      }
     }
 
     @keyframes ultraHit {
-      0% { transform: translateX(0) rotate(0deg) scale(1); }
-      8% { transform: translateX(-30px) rotate(-25deg) scale(0.8); }
-      16% { transform: translateX(20px) rotate(15deg) scale(1.2); }
-      24% { transform: translateX(-15px) rotate(-12deg) scale(0.85); }
-      32% { transform: translateX(12px) rotate(10deg) scale(1.15); }
-      40% { transform: translateX(-8px) rotate(-8deg) scale(0.9); }
-      48% { transform: translateX(6px) rotate(5deg) scale(1.1); }
-      56% { transform: translateX(-4px) rotate(-4deg) scale(0.95); }
-      64% { transform: translateX(3px) rotate(3deg) scale(1.05); }
-      72% { transform: translateX(-2px) rotate(-2deg) scale(0.98); }
-      80% { transform: translateX(1px) rotate(1deg) scale(1.02); }
-      88% { transform: translateX(-0.5px) rotate(-0.5deg) scale(0.99); }
-      96% { transform: translateX(0.3px) rotate(0.3deg) scale(1.01); }
-      100% { transform: translateX(0) rotate(0deg) scale(1); }
+      0% {
+        transform: translateX(0) rotate(0deg) scale(1);
+      }
+
+      8% {
+        transform: translateX(-30px) rotate(-25deg) scale(0.8);
+      }
+
+      16% {
+        transform: translateX(20px) rotate(15deg) scale(1.2);
+      }
+
+      24% {
+        transform: translateX(-15px) rotate(-12deg) scale(0.85);
+      }
+
+      32% {
+        transform: translateX(12px) rotate(10deg) scale(1.15);
+      }
+
+      40% {
+        transform: translateX(-8px) rotate(-8deg) scale(0.9);
+      }
+
+      48% {
+        transform: translateX(6px) rotate(5deg) scale(1.1);
+      }
+
+      56% {
+        transform: translateX(-4px) rotate(-4deg) scale(0.95);
+      }
+
+      64% {
+        transform: translateX(3px) rotate(3deg) scale(1.05);
+      }
+
+      72% {
+        transform: translateX(-2px) rotate(-2deg) scale(0.98);
+      }
+
+      80% {
+        transform: translateX(1px) rotate(1deg) scale(1.02);
+      }
+
+      88% {
+        transform: translateX(-0.5px) rotate(-0.5deg) scale(0.99);
+      }
+
+      96% {
+        transform: translateX(0.3px) rotate(0.3deg) scale(1.01);
+      }
+
+      100% {
+        transform: translateX(0) rotate(0deg) scale(1);
+      }
     }
 
     @keyframes knockout {
-      0% { transform: translateY(0) rotate(0deg) scale(1); opacity: 1; }
-      30% { transform: translateY(-10px) rotate(-15deg) scale(0.95); opacity: 0.9; }
-      70% { transform: translateY(40px) rotate(-90deg) scale(0.8); opacity: 0.7; }
-      100% { transform: translateY(60px) rotate(-90deg) scale(0.7); opacity: 0.4; }
+      0% {
+        transform: translateY(0) rotate(0deg) scale(1);
+        opacity: 1;
+      }
+
+      30% {
+        transform: translateY(-10px) rotate(-15deg) scale(0.95);
+        opacity: 0.9;
+      }
+
+      70% {
+        transform: translateY(40px) rotate(-90deg) scale(0.8);
+        opacity: 0.7;
+      }
+
+      100% {
+        transform: translateY(60px) rotate(-90deg) scale(0.7);
+        opacity: 0.4;
+      }
     }
 
     @keyframes redPulse {
-      0%, 100% { filter: brightness(0.7) drop-shadow(0 0 15px rgba(255, 0, 0, 0.8)); }
-      50% { filter: brightness(0.5) drop-shadow(0 0 25px rgba(255, 0, 0, 1)); }
+
+      0%,
+      100% {
+        filter: brightness(0.7) drop-shadow(0 0 15px rgba(255, 0, 0, 0.8));
+      }
+
+      50% {
+        filter: brightness(0.5) drop-shadow(0 0 25px rgba(255, 0, 0, 1));
+      }
     }
 
     .screen-shake {
@@ -267,37 +426,115 @@
     }
 
     @keyframes screenShake {
-      0%, 100% { transform: translateX(0); }
-      25% { transform: translateX(-3px); }
-      75% { transform: translateX(3px); }
+
+      0%,
+      100% {
+        transform: translateX(0);
+      }
+
+      25% {
+        transform: translateX(-3px);
+      }
+
+      75% {
+        transform: translateX(3px);
+      }
     }
 
     @keyframes megaShake {
-      0%, 100% { transform: translateX(0) translateY(0); }
-      10% { transform: translateX(-5px) translateY(-2px); }
-      20% { transform: translateX(5px) translateY(2px); }
-      30% { transform: translateX(-4px) translateY(-1px); }
-      40% { transform: translateX(4px) translateY(1px); }
-      50% { transform: translateX(-3px) translateY(-1px); }
-      60% { transform: translateX(3px) translateY(1px); }
-      70% { transform: translateX(-2px) translateY(-0.5px); }
-      80% { transform: translateX(2px) translateY(0.5px); }
+
+      0%,
+      100% {
+        transform: translateX(0) translateY(0);
+      }
+
+      10% {
+        transform: translateX(-5px) translateY(-2px);
+      }
+
+      20% {
+        transform: translateX(5px) translateY(2px);
+      }
+
+      30% {
+        transform: translateX(-4px) translateY(-1px);
+      }
+
+      40% {
+        transform: translateX(4px) translateY(1px);
+      }
+
+      50% {
+        transform: translateX(-3px) translateY(-1px);
+      }
+
+      60% {
+        transform: translateX(3px) translateY(1px);
+      }
+
+      70% {
+        transform: translateX(-2px) translateY(-0.5px);
+      }
+
+      80% {
+        transform: translateX(2px) translateY(0.5px);
+      }
     }
 
     @keyframes ultraShake {
-      0%, 100% { transform: translateX(0) translateY(0); }
-      5% { transform: translateX(-8px) translateY(-3px); }
-      10% { transform: translateX(8px) translateY(3px); }
-      15% { transform: translateX(-6px) translateY(-2px); }
-      20% { transform: translateX(6px) translateY(2px); }
-      25% { transform: translateX(-4px) translateY(-1px); }
-      30% { transform: translateX(4px) translateY(1px); }
-      35% { transform: translateX(-3px) translateY(-1px); }
-      40% { transform: translateX(3px) translateY(1px); }
-      45% { transform: translateX(-2px) translateY(-0.5px); }
-      50% { transform: translateX(2px) translateY(0.5px); }
-      55% { transform: translateX(-1px) translateY(-0.2px); }
-      60% { transform: translateX(1px) translateY(0.2px); }
+
+      0%,
+      100% {
+        transform: translateX(0) translateY(0);
+      }
+
+      5% {
+        transform: translateX(-8px) translateY(-3px);
+      }
+
+      10% {
+        transform: translateX(8px) translateY(3px);
+      }
+
+      15% {
+        transform: translateX(-6px) translateY(-2px);
+      }
+
+      20% {
+        transform: translateX(6px) translateY(2px);
+      }
+
+      25% {
+        transform: translateX(-4px) translateY(-1px);
+      }
+
+      30% {
+        transform: translateX(4px) translateY(1px);
+      }
+
+      35% {
+        transform: translateX(-3px) translateY(-1px);
+      }
+
+      40% {
+        transform: translateX(3px) translateY(1px);
+      }
+
+      45% {
+        transform: translateX(-2px) translateY(-0.5px);
+      }
+
+      50% {
+        transform: translateX(2px) translateY(0.5px);
+      }
+
+      55% {
+        transform: translateX(-1px) translateY(-0.2px);
+      }
+
+      60% {
+        transform: translateX(1px) translateY(0.2px);
+      }
     }
 
     .impact-effect {
@@ -311,16 +548,29 @@
     }
 
     @keyframes impactPop {
-      0% { opacity: 0; transform: scale(0.3) translateY(0); }
-      30% { opacity: 1; transform: scale(1.3) translateY(-10px); }
-      100% { opacity: 0; transform: scale(1) translateY(-30px); }
+      0% {
+        opacity: 0;
+        transform: scale(0.3) translateY(0);
+      }
+
+      30% {
+        opacity: 1;
+        transform: scale(1.3) translateY(-10px);
+      }
+
+      100% {
+        opacity: 0;
+        transform: scale(1) translateY(-30px);
+      }
     }
 
     /* Styles pour Sonic (AGGRANDI x2) */
     .sonic {
       position: absolute;
-      width: 360px; /* 180px * 2 */
-      height: 360px; /* 180px * 2 */
+      width: 360px;
+      /* 180px * 2 */
+      height: 360px;
+      /* 180px * 2 */
       background-image: url('https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExaHcxc3R1M2dzMXcyNGdrYmt4b2Zubm50YjRtNjhkNzl6b3BvNThzdCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/tWxWSLETMcXRzWvV2B/giphy.gif');
       background-size: contain;
       background-repeat: no-repeat;
@@ -337,16 +587,27 @@
     }
 
     @keyframes sonicJump {
-      0% { transform: translateX(-50%) translateY(0); }
-      50% { transform: translateX(-50%) translateY(-240px); } /* 120px * 2 */
-      100% { transform: translateX(-50%) translateY(0); }
+      0% {
+        transform: translateX(-50%) translateY(0);
+      }
+
+      50% {
+        transform: translateX(-50%) translateY(-240px);
+      }
+
+      /* 120px * 2 */
+      100% {
+        transform: translateX(-50%) translateY(0);
+      }
     }
 
     /* Animation d'attaque spéciale (AGGRANDIE x2) */
     .special-attack {
       position: absolute;
-      width: 360px; /* 180px * 2 */
-      height: 360px; /* 180px * 2 */
+      width: 360px;
+      /* 180px * 2 */
+      height: 360px;
+      /* 180px * 2 */
       left: 0;
       top: 50%;
       transform: translateY(-50%);
@@ -364,14 +625,17 @@
         opacity: 0;
         transform: translateY(-50%) translateX(-50px) scale(0.5);
       }
+
       20% {
         opacity: 1;
         transform: translateY(-50%) translateX(0) scale(1);
       }
+
       80% {
         opacity: 1;
         transform: translateY(-50%) translateX(0) scale(1);
       }
+
       100% {
         opacity: 0;
         transform: translateY(-50%) translateX(20px) scale(0.8);
@@ -597,7 +861,7 @@
       background-repeat: no-repeat;
       background-position: center;
       border-radius: 10px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
     }
 
     .popup-reward-text {
@@ -660,10 +924,12 @@
         opacity: 0;
         transform: translateX(-50%) translateY(15px) scale(0.5);
       }
+
       50% {
         opacity: 1;
         transform: translateX(-50%) translateY(-8px) scale(1.1);
       }
+
       100% {
         opacity: 0;
         transform: translateX(-50%) translateY(-25px) scale(1);
@@ -680,7 +946,7 @@
       font-weight: bold;
       font-size: 0.9em;
       display: none;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
       border: 2px solid rgba(0, 255, 204, 0.2);
       color: #ffffff;
     }
@@ -757,24 +1023,28 @@
         padding: 15px;
         margin: 5px;
       }
-      
+
       h1 {
         font-size: 1.8em;
       }
-      
+
       .brick {
         width: 220px;
         height: 200px;
       }
 
       .sonic {
-        width: 280px; /* 140px * 2 */
-        height: 280px; /* 140px * 2 */
+        width: 280px;
+        /* 140px * 2 */
+        height: 280px;
+        /* 140px * 2 */
       }
 
       .special-attack {
-        width: 280px; /* 140px * 2 */
-        height: 280px; /* 140px * 2 */
+        width: 280px;
+        /* 140px * 2 */
+        height: 280px;
+        /* 140px * 2 */
       }
 
       .difficulty-selector {
@@ -785,29 +1055,29 @@
         width: 70px;
         height: 70px;
       }
-      
+
       .skin-selector {
         padding: 10px;
       }
-      
+
       .skin-btn {
         width: 60px;
         height: 60px;
       }
-      
+
       .instructions {
         padding: 10px;
         margin: 15px 0;
       }
-      
+
       .instructions h2 {
         font-size: 1.3em;
       }
-      
+
       .instructions p {
         font-size: 1em;
       }
-      
+
       .attack-modes {
         gap: 4px;
       }
@@ -817,31 +1087,31 @@
         font-size: 11px;
         min-width: 40px;
       }
-      
+
       button {
         padding: 10px 20px;
         font-size: 13px;
         margin: 5px;
       }
-      
+
       .popup-content {
         padding: 20px;
         max-width: 90%;
       }
-      
+
       .popup-reward-image {
         width: 120px;
         height: 120px;
       }
-      
+
       .popup-content h3 {
         font-size: 1.5em;
       }
-      
+
       .popup-reward-text {
         font-size: 1.1em;
       }
-      
+
       .popup-victory-message {
         font-size: 1.2em;
       }
@@ -991,8 +1261,13 @@
     }
 
     @keyframes shimmer {
-      0% { transform: translateX(-100%); }
-      100% { transform: translateX(100%); }
+      0% {
+        transform: translateX(-100%);
+      }
+
+      100% {
+        transform: translateX(100%);
+      }
     }
 
     /* Tableau des derniers gains */
@@ -1167,14 +1442,14 @@
   <div class="winners-table" id="winnersTable">
     <div class="winners-title">⚡ Derniers Jackpots ⚡</div>
     <div class="winners-list" id="winnersList">
-      </div>
+    </div>
   </div>
 
   <div class="game-container" id="gameContainer">
     <div class="combo-indicator" id="comboIndicator">COMBO x0</div>
 
     <h1>⚡ Casse la Brique Magique de Sonic !</h1>
-    
+
     <div class="jackpot-container">
       <div class="jackpot-title">JACKPOT</div>
       <div class="jackpot-amount" id="jackpotAmount">1 000 ⚡</div>
@@ -1182,7 +1457,7 @@
         <div class="jackpot-progress-bar" id="jackpotProgressBar" style="width: 0%"></div>
       </div>
     </div>
-    
+
     <div class="difficulty-selector">
       <div class="difficulty-btn noob active" data-difficulty="noob" title="Noob - 1500 HP"></div>
       <div class="difficulty-btn buchette" data-difficulty="buchette" title="Buchette - 5000 HP"></div>
@@ -1190,7 +1465,7 @@
       <div class="difficulty-btn medium" data-difficulty="medium" title="Moyen - 25000 HP"></div>
       <div class="difficulty-btn hard" data-difficulty="hard" title="Difficile - 50000 HP"></div>
     </div>
-    
+
     <div class="brick-container">
       <div class="special-attack" id="specialAttack"></div>
       <div class="brick easy" id="brick"></div>
@@ -1233,16 +1508,25 @@
     <div class="skin-selector">
       <h3>🎭 Changer l'apparence de Sonic</h3>
       <div class="skin-buttons">
-        <div class="skin-btn active" data-skin="sonic-run" style="background-image: url('https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExaHcxc3R1M2dzMXcyNGdrYmt4b2Zubm50YjRtNjhkNzl6b3BvNThzdCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/tWxWSLETMcXRzWvV2B/giphy.gif')" title="Sonic - Course"></div>
-        <div class="skin-btn" data-skin="sonic-spin" style="background-image: url('https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExMHdpdzZlZmt2aDJ5a2FhOG0ybXc3eHdsOHMwemI4b2Q2aDR2MG9sNSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/n1qM0jUn2qDE9oQ4K1/giphy.gif')" title="Sonic - Rotation"></div>
-        <div class="skin-btn" data-skin="sonic-fast" style="background-image: url('https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExemlmd21sMTR6dmQ1dWpsNWU0c3U1dXJ6NHRtZ3M4Z3pkc3JvbTI3dyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/Mf2VJXVQpkNHJOtmsE/giphy.gif')" title="Sonic - Rapide"></div>
-        <div class="skin-btn" data-skin="sonic-boost" style="background-image: url('https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExMWxpcXUyZXgyN2R3bTBtMWJmeXIydnlxMng2NjMyazhwd2xmazNpeCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/y0HIA3gH3wqXSIWkrb/giphy.gif')" title="Sonic - Boost"></div>
-        <div class="skin-btn" data-skin="super-sonic" style="background-image: url('https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExZng5NGQ0ZWVwdWMzaHg4bTk5aWlpdjk4YXUwZTM3dGIyaGh0YzZreiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/qC0AFNKo07fpyaI2QA/giphy.gif')" title="Super Sonic"></div>
+        <div class="skin-btn active" data-skin="sonic-run"
+          style="background-image: url('https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExaHcxc3R1M2dzMXcyNGdrYmt4b2Zubm50YjRtNjhkNzl6b3BvNThzdCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/tWxWSLETMcXRzWvV2B/giphy.gif')"
+          title="Sonic - Course"></div>
+        <div class="skin-btn" data-skin="sonic-spin"
+          style="background-image: url('https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExMHdpdzZlZmt2aDJ5a2FhOG0ybXc3eHdsOHMwemI4b2Q2aDR2MG9sNSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/n1qM0jUn2qDE9oQ4K1/giphy.gif')"
+          title="Sonic - Rotation"></div>
+        <div class="skin-btn" data-skin="sonic-fast"
+          style="background-image: url('https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExemlmd21sMTR6dmQ1dWpsNWU0c3U1dXJ6NHRtZ3M4Z3pkc3JvbTI3dyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/Mf2VJXVQpkNHJOtmsE/giphy.gif')"
+          title="Sonic - Rapide"></div>
+        <div class="skin-btn" data-skin="sonic-boost"
+          style="background-image: url('https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExMWxpcXUyZXgyN2R3bTBtMWJmeXIydnlxMng2NjMyazhwd2xmazNpeCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/y0HIA3gH3wqXSIWkrb/giphy.gif')"
+          title="Sonic - Boost"></div>
+        <div class="skin-btn" data-skin="super-sonic"
+          style="background-image: url('https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExZng5NGQ0ZWVwdWMzaHg4bTk5aWlpdjk4YXUwZTM3dGIyaGh0YzZreiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/qC0AFNKo07fpyaI2QA/giphy.gif')"
+          title="Super Sonic"></div>
       </div>
     </div>
 
     <div class="controls">
-      <button id="attackBtn">Attaquer (1 coup)</button>
       <button id="resetBtn">Nouvelle Brique</button>
     </div>
 
@@ -1290,7 +1574,7 @@
     let audioContext = null;
     let currentDifficulty = "easy";
     let currentSkin = "sonic-run";
-    
+
     // Variables pour le jackpot
     let jackpotAmount = 1000;
     let jackpotProgress = 0;
@@ -1300,38 +1584,38 @@
     const brick = document.getElementById("brick");
     const sonic = document.getElementById("sonic");
     const message = document.getElementById("message");
-    const attackBtn = document.getElementById("attackBtn");
+    // const attackBtn = document.getElementById("attackBtn"); // Supprimé
     const gameContainer = document.getElementById("gameContainer");
     const comboIndicator = document.getElementById("comboIndicator");
     const particlesContainer = document.getElementById("particlesContainer");
     const hpValue = document.getElementById("hpValue");
     const specialAttack = document.getElementById("specialAttack");
-    
+
     // Éléments de la popup
     const victoryPopup = document.getElementById("victoryPopup");
     const popupRewardImage = document.getElementById("popupRewardImage");
     const popupRewardText = document.getElementById("popupRewardText");
     const popupVictoryMessage = document.getElementById("popupVictoryMessage");
     const closePopupBtn = document.getElementById("closePopupBtn");
-    
+
     // Éléments du jackpot
     const jackpotAmountElement = document.getElementById("jackpotAmount");
     const jackpotProgressBar = document.getElementById("jackpotProgressBar");
     const jackpotWinner = document.getElementById("jackpotWinner");
     const jackpotWinnerAmount = document.getElementById("jackpotWinnerAmount");
     const jackpotCloseBtn = document.getElementById("jackpotCloseBtn");
-    
+
     // Éléments du tableau des gains
     const winnersTable = document.getElementById("winnersTable");
     const winnersList = document.getElementById("winnersList");
-    
+
     // Boutons de sauvegarde
     const saveBtn = document.getElementById("saveBtn");
     const loadBtn = document.getElementById("loadBtn");
     const resetSaveBtn = document.getElementById("resetSaveBtn");
 
     const impactEffects = ["💥", "⚡", "✨", "💫", "🌟", "💢"];
-    
+
     // URLs des skins Sonic
     const sonicSkins = {
       "sonic-run": "https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExaHcxc3R1M2dzMXcyNGdrYmt4b2Zubm50YjRtNjhkNzl6b3BvNThzdCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/tWxWSLETMcXRzWvV2B/giphy.gif",
@@ -1340,7 +1624,6 @@
       "sonic-boost": "https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExMWxpcXUyZXgyN2R3bTBtMWJmeXIydnlxMng2NjMyazhwd2xmazNpeCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/y0HIA3gH3wqXSIWkrb/giphy.gif",
       "super-sonic": "https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExZng5NGQ0ZWVwdWMzaHg4bTk5aWlpdjk4YXUwZTM3dGIyaGh0YzZreiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/qC0AFNKo07fpyaI2QA/giphy.gif"
     };
-
     // Système audio corrigé
     function initAudioContext() {
       try {
@@ -1363,16 +1646,16 @@
       try {
         const oscillator = context.createOscillator();
         const gainNode = context.createGain();
-        
+
         oscillator.connect(gainNode);
         gainNode.connect(context.destination);
-        
+
         oscillator.frequency.value = frequency;
         oscillator.type = type;
-        
+
         gainNode.gain.setValueAtTime(volume, context.currentTime);
         gainNode.gain.exponentialRampToValueAtTime(0.01, context.currentTime + duration);
-        
+
         oscillator.start(context.currentTime);
         oscillator.stop(context.currentTime + duration);
       } catch (e) {
@@ -1402,24 +1685,23 @@
       setTimeout(() => createSound(784, 0.1, 'sine', 0.2), 200);
       setTimeout(() => createSound(1047, 0.3, 'sine', 0.3), 300);
     }
-
     // Fonction pour créer des particules d'impact
     function createHitParticles() {
       for (let i = 0; i < 8; i++) {
         const particle = document.createElement('div');
         particle.className = 'particle';
-        
+
         const brickRect = brick.getBoundingClientRect();
         const containerRect = brick.parentElement.getBoundingClientRect();
-        
-        particle.style.left = (brickRect.left + brickRect.width/2 - containerRect.left + (Math.random() * 60 - 30)) + 'px';
-        particle.style.top = (brickRect.top + brickRect.height/2 - containerRect.top + (Math.random() * 60 - 30)) + 'px';
-        
+
+        particle.style.left = (brickRect.left + brickRect.width / 2 - containerRect.left + (Math.random() * 60 - 30)) + 'px';
+        particle.style.top = (brickRect.top + brickRect.height / 2 - containerRect.top + (Math.random() * 60 - 30)) + 'px';
+
         particlesContainer.appendChild(particle);
-        
+
         const angle = Math.random() * Math.PI * 2;
         const distance = 30 + Math.random() * 40;
-        
+
         particle.animate([
           {
             transform: 'scale(1)',
@@ -1443,10 +1725,10 @@
       specialAttack.style.backgroundSize = "contain";
       specialAttack.style.backgroundRepeat = "no-repeat";
       specialAttack.style.backgroundPosition = "center";
-      
+
       // Activer l'animation
       specialAttack.classList.add('active');
-      
+
       // Désactiver l'animation après qu'elle soit terminée
       setTimeout(() => {
         specialAttack.classList.remove('active');
@@ -1456,7 +1738,7 @@
     // Fonction pour animer Sonic qui saute
     function animateSonicJump() {
       sonic.classList.add('jumping');
-      
+
       // Retirer la classe après l'animation
       setTimeout(() => {
         sonic.classList.remove('jumping');
@@ -1469,9 +1751,9 @@
       effect.textContent = impactEffects[Math.floor(Math.random() * impactEffects.length)];
       effect.style.left = (Math.random() * 70 + 15) + '%';
       effect.style.top = (Math.random() * 50 + 25) + '%';
-      
+
       document.querySelector('.brick-container').appendChild(effect);
-      
+
       setTimeout(() => {
         effect.remove();
       }, 1000);
@@ -1484,7 +1766,7 @@
       }
       combo++;
       lastHitTime = currentTime;
-      
+
       if (combo >= 3) {
         comboIndicator.textContent = `COMBO x${combo}`;
         comboIndicator.style.display = 'block';
@@ -1500,12 +1782,12 @@
     // Fonction pour mettre à jour le tableau des gains
     function updateWinnersTable() {
       winnersList.innerHTML = '';
-      
+
       if (recentWinners.length === 0) {
         winnersList.innerHTML = '<div class="winner-item"><span class="winner-name">Aucun gain récent</span></div>';
         return;
       }
-      
+
       recentWinners.forEach(winner => {
         const winnerItem = document.createElement('div');
         winnerItem.className = 'winner-item';
@@ -1524,12 +1806,12 @@
         jackpotAmount += 5;
         jackpotHitsCounter = 0;
         jackpotProgress = 0;
-        
+
         // Mettre à jour l'affichage
         updateJackpot();
-        
+
         // Vérifier si on gagne le jackpot (1 chance sur 5 millions)
-        if (Math.random() < 1/5000000) {
+        if (Math.random() < 1 / 5000000) {
           winJackpot();
         }
       } else {
@@ -1542,26 +1824,26 @@
     // Fonction pour gagner le jackpot
     function winJackpot() {
       playJackpotSound();
-      
+
       // Ajouter le gagnant à la liste
       const playerName = "Joueur " + Math.floor(Math.random() * 1000);
       recentWinners.unshift({
         name: playerName,
         amount: jackpotAmount
       });
-      
+
       // Garder seulement les 5 derniers gains
       if (recentWinners.length > 5) {
         recentWinners = recentWinners.slice(0, 5);
       }
-      
+
       // Mettre à jour le tableau des gains
       updateWinnersTable();
-      
+
       // Afficher la popup de victoire du jackpot
       jackpotWinnerAmount.textContent = jackpotAmount.toLocaleString() + " ⚡";
       jackpotWinner.classList.add('active');
-      
+
       // Réinitialiser le jackpot
       jackpotAmount = 1000;
       jackpotHitsCounter = 0;
@@ -1572,31 +1854,31 @@
     // Fonction d'attaque CORRIGÉE avec protection anti-clics multiples
     function attack() {
       if (currentHP <= 0 || isAttacking) return;
-      
+
       isAttacking = true;
-      
+
       let hits = attackMode;
       let actualHits = 0;
       let rosesEarned = 0;
       let wasCracked = brick.classList.contains('cracked');
-      
+
       // Animer Sonic qui saute
       animateSonicJump();
-      
+
       // Animer l'attaque spéciale pour les modes d'attaque élevés
       if (attackMode >= 10) {
         animateSpecialAttack();
       }
-      
+
       playHitSound();
       createHitParticles();
       createImpactEffect();
       updateCombo();
-      
+
       let animationType = 'hit';
       let shakeType = 'screen-shake';
       let animationDuration = 400;
-      
+
       if (attackMode >= 1000) {
         animationType = 'ultra-hit';
         shakeType = 'ultra-shake';
@@ -1619,13 +1901,12 @@
 
       brick.classList.add(animationType);
       if (shakeType) gameContainer.classList.add(shakeType);
-      
+
       for (let i = 0; i < hits && currentHP > 0; i++) {
         coupCounter++;
         actualHits++;
         totalHits++;
         jackpotHitsCounter++; // Incrémenter le compteur de coups pour le jackpot
-
         // 1 coup = -1 point de vie
         currentHP--;
 
@@ -1636,25 +1917,25 @@
           hitsUntilCoin = 4;
         }
       }
-      
+
       // Vérifier si on gagne le jackpot
       checkJackpot();
-      
+
       if (rosesEarned > 0) {
         showRoseGain(rosesEarned);
       }
-      
+
       updateUI();
-      
+
       if (!wasCracked && brick.classList.contains('cracked')) {
         playCrackSound();
       }
-      
+
       setTimeout(() => {
         brick.classList.remove(animationType);
         if (shakeType) gameContainer.classList.remove(shakeType);
         isAttacking = false;
-        
+
         if (currentHP <= 0) {
           endGame();
         }
@@ -1666,7 +1947,7 @@
       roseDisplay.className = 'coins-display';
       roseDisplay.textContent = `+${amount} ⚡`;
       brick.parentElement.appendChild(roseDisplay);
-      
+
       setTimeout(() => {
         roseDisplay.remove();
       }, 1000);
@@ -1675,16 +1956,16 @@
     function updateUI() {
       // Mettre à jour le compteur de points de vie
       hpValue.textContent = `${currentHP.toLocaleString()} / ${maxHP.toLocaleString()}`;
-      
+
       let difficultyName = "";
-      switch(currentDifficulty) {
+      switch (currentDifficulty) {
         case "noob": difficultyName = "noob"; break;
         case "buchette": difficultyName = "buchette"; break;
         case "easy": difficultyName = "facile"; break;
         case "medium": difficultyName = "moyen"; break;
         case "hard": difficultyName = "difficile"; break;
       }
-      
+
       if (currentHP === 0) {
         brick.className = "brick broken " + currentDifficulty;
         message.textContent = "💥 La brique magique a été cassée !";
@@ -1703,9 +1984,9 @@
       let rewardText = "";
       let victoryText = "";
       let rewardImg = "";
-      
+
       // Déterminer la récompense selon la difficulté
-      switch(currentDifficulty) {
+      switch (currentDifficulty) {
         case "noob":
           rewardText = "Vous avez gagné 300 pièces !";
           victoryText = "Bravo ! Tu as gagné tes premières pièces !";
@@ -1732,22 +2013,22 @@
           rewardImg = "https://i.ibb.co/DHBNtX7t/IMG-6573.png";
           break;
       }
-      
+
       popupRewardImage.style.backgroundImage = `url('${rewardImg}')`;
-      
+
       // Message de victoire clair et épuré
       popupRewardText.innerHTML = `
         <div class="difficulty-badge ${currentDifficulty}">NIVEAU ${currentDifficulty.toUpperCase()}</div><br>
         <strong>RÉCOMPENSE :</strong><br>
         ${rewardText}
       `;
-      
+
       popupVictoryMessage.textContent = victoryText;
-      
+
       // Centrer la popup sur le jeu
       const gameRect = gameContainer.getBoundingClientRect();
       const popupContent = document.querySelector('.popup-content');
-      
+
       // Positionner la popup au centre du jeu
       victoryPopup.style.display = 'flex';
       setTimeout(() => {
@@ -1768,41 +2049,41 @@
 
     function endGame() {
       playBreakSound();
-      
+
       message.textContent = "💥 Félicitations ! Tu as cassé la brique magique ! ⚡✨";
-      
+
       setTimeout(() => {
         showVictoryPopup();
       }, 500);
-      
+
       comboIndicator.style.display = "none";
     }
 
     function setAttackMode(mode) {
       attackMode = mode;
-      
+
       document.querySelectorAll('.attack-mode-image').forEach(btn => {
         btn.classList.remove('active');
       });
-      
+
       const btnEl = document.getElementById(`mode${mode}`);
       if (btnEl) btnEl.classList.add('active');
 
-      attackBtn.textContent = `Attaquer (${mode} coup${mode > 1 ? 's' : ''})`;
+      // Ligne supprimée : attackBtn.textContent = ...
     }
 
     function setDifficulty(difficulty) {
       currentDifficulty = difficulty;
-      
+
       // Mettre à jour l'apparence des boutons de difficulté
       document.querySelectorAll('.difficulty-btn').forEach(btn => {
         btn.classList.remove('active');
       });
       document.querySelector(`.difficulty-btn.${difficulty}`).classList.add('active');
-      
+
       // Mettre à jour l'apparence de la brique
       brick.className = "brick " + difficulty;
-      
+
       // Réinitialiser le jeu avec la nouvelle difficulté
       initGame();
     }
@@ -1810,16 +2091,16 @@
     // Fonction pour changer de skin Sonic
     function setSonicSkin(skin) {
       currentSkin = skin;
-      
+
       // Mettre à jour l'apparence des boutons de skin
       document.querySelectorAll('.skin-btn').forEach(btn => {
         btn.classList.remove('active');
       });
       document.querySelector(`.skin-btn[data-skin="${skin}"]`).classList.add('active');
-      
+
       // Mettre à jour l'image de Sonic
       sonic.style.backgroundImage = `url('${sonicSkins[skin]}')`;
-      
+
       // Sauvegarder le skin dans le localStorage
       try {
         localStorage.setItem('sonicSkin', skin);
@@ -1830,7 +2111,7 @@
 
     function initGame() {
       // Définir les points de vie selon la difficulté
-      switch(currentDifficulty) {
+      switch (currentDifficulty) {
         case "noob":
           maxHP = 1500;
           break;
@@ -1847,7 +2128,7 @@
           maxHP = 50000;
           break;
       }
-      
+
       currentHP = maxHP;
       coupCounter = 0;
       totalHits = 0;
@@ -1856,11 +2137,11 @@
       combo = 0;
       lastHitTime = 0;
       isAttacking = false;
-      
+
       brick.className = "brick " + currentDifficulty;
-      
+
       let difficultyName = "";
-      switch(currentDifficulty) {
+      switch (currentDifficulty) {
         case "noob": difficultyName = "noob"; break;
         case "buchette": difficultyName = "buchette"; break;
         case "easy": difficultyName = "facile"; break;
@@ -1868,7 +2149,7 @@
         case "hard": difficultyName = "difficile"; break;
       }
       message.textContent = `Brique magique ${difficultyName} - À tout moment la brique peut être cassée...`;
-      
+
       // Fermer la popup si elle est ouverte
       closeVictoryPopup();
       comboIndicator.style.display = "none";
@@ -1877,7 +2158,7 @@
       coupCounter = 0;
       totalHits = 0;
       hitsUntilCoin = 4;
-      
+
       // Mettre à jour l'affichage des points de vie
       updateUI();
     }
@@ -1885,9 +2166,9 @@
     // Fonction pour rendre le tableau des gains déplaçable
     function makeElementDraggable(element) {
       let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
-      
+
       element.onmousedown = dragMouseDown;
-      
+
       function dragMouseDown(e) {
         e = e || window.event;
         e.preventDefault();
@@ -1898,7 +2179,7 @@
         // Appeler une fonction chaque fois que la souris bouge
         document.onmousemove = elementDrag;
       }
-      
+
       function elementDrag(e) {
         e = e || window.event;
         e.preventDefault();
@@ -1911,7 +2192,7 @@
         element.style.top = (element.offsetTop - pos2) + "px";
         element.style.left = (element.offsetLeft - pos1) + "px";
       }
-      
+
       function closeDragElement() {
         // Arrêter le déplacement lorsque le bouton de la souris est relâché
         document.onmouseup = null;
@@ -1930,19 +2211,19 @@
           currentSkin: currentSkin,
           saveDate: new Date().toISOString()
         };
-        
+
         localStorage.setItem('sonicBrickGameSave', JSON.stringify(gameData));
-        
+
         // Afficher un message de confirmation
         const originalText = saveBtn.textContent;
         saveBtn.textContent = "✓ Sauvegardé !";
         saveBtn.style.background = "linear-gradient(45deg, #4CAF50, #8BC34A)";
-        
+
         setTimeout(() => {
           saveBtn.textContent = originalText;
           saveBtn.style.background = "linear-gradient(45deg, #4CAF50, #8BC34A)";
         }, 2000);
-        
+
         console.log("Jeu sauvegardé avec succès !");
       } catch (error) {
         console.error("Erreur lors de la sauvegarde :", error);
@@ -1953,38 +2234,38 @@
     function loadGame() {
       try {
         const savedData = localStorage.getItem('sonicBrickGameSave');
-        
+
         if (!savedData) {
           alert("Aucune sauvegarde trouvée !");
           return;
         }
-        
+
         const gameData = JSON.parse(savedData);
-        
+
         // Charger les données du jackpot
         jackpotAmount = gameData.jackpotAmount || 1000;
         jackpotHitsCounter = gameData.jackpotHitsCounter || 0;
         jackpotProgress = gameData.jackpotProgress || 0;
         recentWinners = gameData.recentWinners || [];
         currentSkin = gameData.currentSkin || "sonic-run";
-        
+
         // Appliquer le skin sauvegardé
         setSonicSkin(currentSkin);
-        
+
         // Mettre à jour l'affichage
         updateJackpot();
         updateWinnersTable();
-        
+
         // Afficher un message de confirmation
         const originalText = loadBtn.textContent;
         loadBtn.textContent = "✓ Chargé !";
         loadBtn.style.background = "linear-gradient(45deg, #2196F3, #03A9F4)";
-        
+
         setTimeout(() => {
           loadBtn.textContent = originalText;
           loadBtn.style.background = "linear-gradient(45deg, #2196F3, #03A9F4)";
         }, 2000);
-        
+
         console.log("Jeu chargé avec succès !");
       } catch (error) {
         console.error("Erreur lors du chargement :", error);
@@ -1996,31 +2277,31 @@
       if (confirm("Êtes-vous sûr de vouloir réinitialiser la sauvegarde ? Cette action est irréversible.")) {
         try {
           localStorage.removeItem('sonicBrickGameSave');
-          
+
           // Réinitialiser les données du jackpot
           jackpotAmount = 1000;
           jackpotHitsCounter = 0;
           jackpotProgress = 0;
           recentWinners = [];
           currentSkin = "sonic-run";
-          
+
           // Réappliquer le skin par défaut
           setSonicSkin("sonic-run");
-          
+
           // Mettre à jour l'affichage
           updateJackpot();
           updateWinnersTable();
-          
+
           // Afficher un message de confirmation
           const originalText = resetSaveBtn.textContent;
           resetSaveBtn.textContent = "✓ Réinitialisé !";
           resetSaveBtn.style.background = "linear-gradient(45deg, #F44336, #E91E63)";
-          
+
           setTimeout(() => {
             resetSaveBtn.textContent = originalText;
             resetSaveBtn.style.background = "linear-gradient(45deg, #F44336, #E91E63)";
           }, 2000);
-          
+
           console.log("Sauvegarde réinitialisée !");
         } catch (error) {
           console.error("Erreur lors de la réinitialisation :", error);
@@ -2029,7 +2310,7 @@
     }
 
     // Événements CORRIGÉS
-    document.getElementById("attackBtn").addEventListener("click", attack);
+    // document.getElementById("attackBtn").addEventListener("click", attack); // Supprimé
     document.getElementById("resetBtn").addEventListener("click", initGame);
 
     // Boutons de sauvegarde
@@ -2037,24 +2318,25 @@
     loadBtn.addEventListener("click", loadGame);
     resetSaveBtn.addEventListener("click", resetSave);
 
-    // Boutons d'attaque (images d'origine conservées)
-    document.getElementById("mode1").addEventListener("click", () => setAttackMode(1));
-    document.getElementById("mode10").addEventListener("click", () => setAttackMode(10));
-    document.getElementById("mode30").addEventListener("click", () => setAttackMode(30));
-    document.getElementById("mode100").addEventListener("click", () => setAttackMode(100));
-    document.getElementById("mode500").addEventListener("click", () => setAttackMode(500));
-    document.getElementById("mode1000").addEventListener("click", () => setAttackMode(1000));
+    // Boutons d'attaque (images d'origine conservées) - MODIFIÉS
+    document.getElementById("mode1").addEventListener("click", () => { setAttackMode(1); attack(); });
+    document.getElementById("mode10").addEventListener("click", () => { setAttackMode(10); attack(); });
+    document.getElementById("mode30").addEventListener("click", () => { setAttackMode(30); attack(); });
+    document.getElementById("mode100").addEventListener("click", () => { setAttackMode(100); attack(); });
+    document.getElementById("mode500").addEventListener("click", () => { setAttackMode(500); attack(); });
+    document.getElementById("mode1000").addEventListener("click", () => { setAttackMode(1000); attack(); });
+
 
     // Sélecteur de difficulté
     document.querySelectorAll('.difficulty-btn').forEach(btn => {
-      btn.addEventListener('click', function() {
+      btn.addEventListener('click', function () {
         setDifficulty(this.getAttribute('data-difficulty'));
       });
     });
 
     // Boutons de changement de skin
     document.querySelectorAll('.skin-btn').forEach(btn => {
-      btn.addEventListener('click', function() {
+      btn.addEventListener('click', function () {
         setSonicSkin(this.getAttribute('data-skin'));
       });
     });
@@ -2064,13 +2346,13 @@
     jackpotCloseBtn.addEventListener('click', closeJackpotPopup);
 
     // Fermer la popup en cliquant en dehors
-    victoryPopup.addEventListener('click', function(e) {
+    victoryPopup.addEventListener('click', function (e) {
       if (e.target === this) {
         closeVictoryPopup();
       }
     });
 
-    jackpotWinner.addEventListener('click', function(e) {
+    jackpotWinner.addEventListener('click', function (e) {
       if (e.target === this) {
         closeJackpotPopup();
       }
@@ -2079,30 +2361,36 @@
     // Raccourcis clavier
     document.addEventListener('keydown', (e) => {
       if (isAttacking) return;
-      
-      switch(e.key) {
+
+      switch (e.key) {
         case ' ':
         case 'Enter':
           e.preventDefault();
-          attack();
+          attack(); // Attaque avec le mode actuellement sélectionné
           break;
         case '1':
           setAttackMode(1);
+          attack(); // Attaque directement
           break;
         case '2':
           setAttackMode(10);
+          attack(); // Attaque directement
           break;
         case '3':
           setAttackMode(30);
+          attack(); // Attaque directement
           break;
         case '4':
           setAttackMode(100);
+          attack(); // Attaque directement
           break;
         case '5':
           setAttackMode(500);
+          attack(); // Attaque directement
           break;
         case '6':
           setAttackMode(1000);
+          attack(); // Attaque directement
           break;
         case 'r':
         case 'R':
@@ -2175,25 +2463,25 @@
     // Initialiser le jackpot
     updateJackpot();
     updateWinnersTable();
-    
+
     // Rendre le tableau des gains déplaçable
     makeElementDraggable(winnersTable);
-    
+
     // Charger automatiquement la sauvegarde au démarrage
-    window.addEventListener('load', function() {
+    window.addEventListener('load', function () {
       const savedData = localStorage.getItem('sonicBrickGameSave');
       if (savedData) {
         console.log("Sauvegarde détectée, chargement automatique...");
         loadGame();
       }
-      
+
       // Charger le skin sauvegardé s'il existe
       const savedSkin = localStorage.getItem('sonicSkin');
       if (savedSkin && sonicSkins[savedSkin]) {
         setSonicSkin(savedSkin);
       }
     });
-    
+
     initGame();
   </script>
 </body>
